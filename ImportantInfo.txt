@@ -1,0 +1,84 @@
+
+NugetPackages Required: 
+
+Microsoft.EntityFrameworkCore 
+Microsoft.EntityFrameworkCore.SqlServer or sqlite
+Microsoft.EntityFrameworkCore.Design
+
+
+
+
+
+
+
+
+Command line code for migration: 
+Before running these commands, stop the execution the project. 
+For creating migration
+dotnet ef migrations add InitialCreate  -o Data/Migrations : -o Data/Migrations is used for specifying the output 
+                                                             folder. No need to specify that in subsequent migrations. 
+
+dotnet ef migrations add migrationName : For subsequent migrations                                    
+For updating database 
+dotnet ef database update 
+dotnet ef database drop : To drop database. To create again, dotnet ef database update. By creating again, we would lose all the data. 
+
+GIT Commands 
+git init : Initialises our project (existing) for GIT. 
+dotnet new gitignore : For ignoring unnecessary file for git like build results. This commands creates
+                       file named gitignore and then it contains all the file that should be ignored. 
+                       this file is customizable. Also, add appsettings.json file cuz it'll have all the sensitive informations of our repo. 
+
+git remote add origin https://github.com/hari9526/DatingApp.git 
+                        : This tells where is our remote repo is. 
+
+
+git push -u origin main : Specify where to push the changes(branch or master). Note master 
+                        is changed to main now. But I was getting error. In my case, I had to use 
+                        orgin master. git show-ref: Use this to know whether one should use master or main.
+
+
+Angular: 
+
+ng new appname : For creating Angular application. First, go to the required folder on where 
+                where you wanna create the app. 
+
+
+ng g -h : For help
+ng g c compnonentName : For creating a component. Make sure you are 
+                        creating it under the app folder. 
+ng g c componentName --skip-test: To avoid creating spec.ts class for testing 
+
+ng analytics project off : To disable analytics informations sent to Google. 
+
+
+Important Modules: 
+
+1. HttpClientModule : For making httprequests.
+
+
+Important installs: 
+ng add ngx-bootstrap : ngx-bootstrap 
+npm install font-awesome : font-awesome 
+npm install bootswatch : for bootswatch 
+
+
+
+
+
+
+Route guard: 
+ng g guard guardName : Select Can Activate when they ask after typing this command. 
+
+Extensions for Angular in VSCode: 
+1. Angular Language Service : For auto complete, info and go to definition feature. 
+2. Angular Snippets: For faster coding by auto complete. 
+3. Bracket pair colorizn or 2 : For colorizing brackets. 
+
+
+Important: 
+1. node_modules : Don't add this to source control. We can create this folder from 
+package.json information. This folder is too big for version control. 
+
+
+
