@@ -16,7 +16,9 @@ export class AccountService {
   currentUser$ = this.currentUser.asObservable();
 
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) {
+    console.log(this.currentUser$)
+   }
 
   register(model: any) {
     return this.http.post(this.baseUrl + "account/register", model).pipe(
@@ -46,6 +48,11 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.next(null);
+  }
+
+  setCurrentUsers(user: User){
+    this.currentUser.next(user); 
+  
   }
 
 

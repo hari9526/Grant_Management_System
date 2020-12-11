@@ -6,5 +6,6 @@ export interface User {
     updatedTime: Date,
     createdById: number,
     updatedById: number,
-    userType: string
+    userType: string, 
+    token : string
 }

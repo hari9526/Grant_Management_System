@@ -16,7 +16,7 @@ import {ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   isLoading: boolean = false;
   loginButtonText: string = "Log in";
-  constructor(  public accountService: AccountService, private fb: FormBuilder) { }
+  constructor(  public accountService: AccountService, private fb: FormBuilder, private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         this.isLoading = false,
         this.loginButtonText = "Log in"
+        this.router.navigateByUrl('/admin');
    
       },
       err => {

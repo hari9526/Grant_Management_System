@@ -22,7 +22,7 @@
             *ngIf="formModel.get('Password').touched && formModel.get('Password').errors?.minlength">Minimum
             4 characters required.</label>
     </div>
-    <div class="form-row mt-4">
+    <div class="form-row mt-2">
         <div class="form-group col-md-8 offset-md-2">
             <button type="submit" class="btn btn-primary active btn-lg btn-block" [disabled]="!formModel.valid"><img
                     *ngIf="isLoading" style="width :30px" src="assets/img/Loader.gif">{{loginButtonText}}</button>

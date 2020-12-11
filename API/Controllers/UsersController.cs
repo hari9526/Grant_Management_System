@@ -1,5 +1,6 @@
 using API.Data;
 using API.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -13,9 +14,8 @@ namespace API.Controllers
         public UsersController(DataContext context)
         {
             _context = context;
-
         }
-
+        [Authorize]
         //Gets the list of users
         public async Task<ActionResult<IEnumerable<UserInfo>>> GetUser()
         {
@@ -24,8 +24,8 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserInfo>> GetUser(int id)   
-    
+        public async Task<ActionResult<UserInfo>> GetUser(int id)
+
         {
             return await _context.UserInfo.FindAsync(id);
         }

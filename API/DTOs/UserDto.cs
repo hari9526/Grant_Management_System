@@ -10,9 +10,10 @@ namespace API.DTOs
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int CreatedById { get; set; }
-        public int  UpdatedById { get; set; }
-        public string  UserType { get; set; }
+        public int UpdatedById { get; set; }
+        public string UserType { get; set; }
+        public string Token { get; set; }
 
-       
+
     }
 }

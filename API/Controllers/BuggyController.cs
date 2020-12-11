@@ -1,3 +1,8 @@
+using API.Data;
+using API.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 namespace API.Controllers
 {
     public class BuggyController : BaseController
@@ -17,8 +22,8 @@ namespace API.Controllers
         }
 
         [HttpGet("not-found")]       
-        public ActionResult<AppUser> GetNotFound(){
-            var thing = _context.Users.Find(-1); 
+        public ActionResult<UserInfo> GetNotFound(){
+            var thing = _context.UserInfo.Find(-1); 
             if(thing == null) 
                 return NotFound(); 
             else    
@@ -27,7 +32,7 @@ namespace API.Controllers
 
         [HttpGet("server-error")]       
         public ActionResult<string> GetServerError(){
-            var thing = _context.Users.Find(-1);  
+            var thing = _context.UserInfo.Find(-1);  
             var thingToReturn = thing.ToString(); 
             return thingToReturn; 
         }
