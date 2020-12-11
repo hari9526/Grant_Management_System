@@ -20,6 +20,7 @@ button[type=submit].btn{
     color: #fff;
 }
 
+
 div.form-group label:not(.text-danger){
     color: #545d6a;
     font-weight: 700;
