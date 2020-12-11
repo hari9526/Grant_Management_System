@@ -49,6 +49,10 @@ ng g c compnonentName : For creating a component. Make sure you are
                         creating it under the app folder. 
 ng g c componentName --skip-test: To avoid creating spec.ts class for testing 
 
+ng g s serviceName : For creating servie classes
+
+ng g interceptor interceptorName : For creating interceptor
+
 ng analytics project off : To disable analytics informations sent to Google. 
 
 
@@ -61,6 +65,24 @@ Important installs:
 ng add ngx-bootstrap : ngx-bootstrap 
 npm install font-awesome : font-awesome 
 npm install bootswatch : for bootswatch 
+npm install ngx-toastr : After this add these in the style section of Angular.json file
+
+                        //Make sure you are adding it to the build section and NOT in 
+                        //test sectoin of angular.json. 
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/font-awesome/css/font-awesome.css",
+                            "./node_modules/ngx-toastr/toastr.css",  
+                            "src/styles.css"
+                        ],
+
+                        if still toastr shows some problem add this in style.css
+
+                        @import '~ngx-toastr/toastr.css';
+                        @import '~bootswatch/dist/united/bootstrap.css'; 
+
+
 
 
 
