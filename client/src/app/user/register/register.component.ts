@@ -4,11 +4,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AccountService } from 'src/app/_services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { dropDownSmall } from 'src/app/animation';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'], 
+  animations: [
+   
+    trigger('itemAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(dropDownSmall)
+      ])
+    ])   
+  ]
 })
 export class RegisterComponent implements OnInit {
   signUpButtonText : string = "Sign up"; 

@@ -64,8 +64,8 @@ div.form-group.required>label:first-child:after{
 }
 
   .tab-header h2.active {
-    color: #E02000;
-    border-bottom: 4px solid #E02000;
+    color: #0062CC;
+    border-bottom: 4px solid #0062CC;
   }
 
   .tab-header h2 {

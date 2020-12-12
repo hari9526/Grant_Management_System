@@ -1,12 +1,12 @@
-<div class="d-flex flex-column sticky-top flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow" *ngIf="(accountService.currentUser$ | async) as user">
-    <h5 class="my-3 mr-md-auto font-weight-normal "><b>Grant Management System</b></h5>
-    <nav class="my-2 my-md-0 mr-md-3">
+<div class="d-flex flex-column sticky-top flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow" *ngIf="(accountService.currentUser$ | async) as user" [@itemAnim]>
+    <h5 class="my-3 mr-md-auto font-weight-normal"><b>Grant Management System</b></h5>
+    <nav class="my-2 my-md-0 mr-md-3" [@textAnim]>
       <a class="p-2 text-secondary"  >Hi {{user.firstName | titlecase}}!</a>
       <a class="p-2 text-secondary" routerLink='/members' routerLinkActive='active'>Grant Program</a>
       <a class="p-2 text-secondary" routerLink='/lists' routerLinkActive='active'>Review</a>    
 
       
-      <a class="p-2 text-danger" (click)="logout()">Logout</a>
+      <a class="p-2 text-primary" (click)="logout()">Logout</a>
     </nav>
  
   </div>

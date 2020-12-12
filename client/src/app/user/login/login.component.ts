@@ -5,13 +5,29 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Login } from 'src/app/_model/login';
 import {User} from 'src/app/_model/user'; 
 import {ToastrService } from 'ngx-toastr';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { dropDownSmall, smallToNormal } from 'src/app/animation';
 
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'], 
+  animations: [
+    trigger('picAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(smallToNormal)
+      ])
+    ]), 
+    trigger('itemAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(dropDownSmall)
+      ])
+    ])   
+  ]
 })
 export class LoginComponent implements OnInit {
   isLoading: boolean = false;

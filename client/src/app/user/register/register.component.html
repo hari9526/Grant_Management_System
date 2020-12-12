@@ -1,4 +1,4 @@
-<form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit()">
+<form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit()" [@itemAnim]>
     <div class="form-group required mb-0 mt-5">
       <label>First Name</label>
       <input class="form-control" formControlName="FirstName">
