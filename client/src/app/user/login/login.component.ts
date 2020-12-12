@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       err => {
   
         this.isLoading = false,
-        this.loginButtonText = "Log in", 
+        this.loginButtonText = "Try again?", 
         console.log(err)
       }
     );

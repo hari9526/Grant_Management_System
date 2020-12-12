@@ -13,7 +13,7 @@ import { dropDownSmall } from '../animation';
       transition('void=>*', [
         useAnimation(dropDownSmall)
       ])
-    ])   
+    ])
   ]
 })
 export class UserComponent implements OnInit {
