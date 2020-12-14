@@ -18,6 +18,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
+import { GrantProgramComponent } from './grant-program/grant-program.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -31,13 +33,15 @@ import { AdminComponent } from './admin/admin.component';
     ServerErrorComponent,
     TestErrorComponent,
     NavComponent,
-    AdminComponent
+    AdminComponent,
+    GrantProgramComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule, 
     BrowserAnimationsModule, 
+    BsDatepickerModule.forRoot(), 
     FormsModule,
     ReactiveFormsModule, 
     ToastrModule.forRoot({

@@ -9,5 +9,6 @@ namespace API.Data
         {
         }
         public DbSet<UserInfo> UserInfo {get;set;}
+        public DbSet<GrantProgram> GrantProgram {get;set;}
     }
 }

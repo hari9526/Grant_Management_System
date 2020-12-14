@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         this.isLoading = false,
         this.loginButtonText = "Log in"
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/grant-program');
    
       },
       err => {

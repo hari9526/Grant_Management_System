@@ -24,7 +24,7 @@ For updating database
 dotnet ef database update 
 dotnet ef database drop : To drop database. To create again, dotnet ef database update. By creating again, we would lose all the data. 
 
-GIT Commands 
+GIT Commands
 git init : Initialises our project (existing) for GIT. 
 dotnet new gitignore : For ignoring unnecessary file for git like build results. This commands creates
                        file named gitignore and then it contains all the file that should be ignored. 

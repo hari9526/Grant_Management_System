@@ -2,8 +2,8 @@ import { animate, animation, keyframes, style } from '@angular/animations';
 
 export let dropDown = animation([
     animate('250ms ease-in', keyframes([
-        style({ opacity: 0, transform: 'translateY(-10%)', offset: 0 }),
-        style({ opacity: .5, transform: 'translateY(10px)', offset: 0.3 }),
+        style({ opacity: 0, transform: 'translateY(-60px)', offset: 0 }),
+        style({ opacity: .5, transform: 'translateY(30px)', offset: 0.3 }),
         style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
     ]))
 ]);

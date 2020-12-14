@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { GrantProgramComponent } from './grant-program/grant-program.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserComponent } from './user/user.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'test-error', component: TestErrorComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'grant-program', component: GrantProgramComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 

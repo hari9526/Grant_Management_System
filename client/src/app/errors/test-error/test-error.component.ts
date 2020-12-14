@@ -1,10 +1,21 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { dropDown, dropDownDeep, dropDownDeepAndUp } from 'src/app/animation';
 
 @Component({
   selector: 'app-test-error',
   templateUrl: './test-error.component.html',
-  styleUrls: ['./test-error.component.css']
+  styleUrls: ['./test-error.component.css'], 
+  animations: [
+   
+    trigger('itemAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(dropDownDeepAndUp)
+      ])
+    ]), 
+  ]
 })
 export class TestErrorComponent implements OnInit {
   baseUrl = 'https://localhost:5001/api/';

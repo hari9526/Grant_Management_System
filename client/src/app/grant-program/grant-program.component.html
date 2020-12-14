@@ -1,0 +1,55 @@
+<div class="grid-table">
+    <div class="thead" [@itemAnim]>
+        <div class="tr">
+            <div class="td">Program Name</div>
+            <div class="td">Program Code</div>
+            <div class="td">Start Date</div>
+            <div class="td">End Date</div>
+            <div class="td">Status</div>
+            <div class="td" (click)="AddGrantProgramForms()">
+                <button class="btn text-success"><i class="fa fa-plus"></i></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of grantProgramForms.controls; let i = index"
+            (submit)="recordSubmit(fg)">
+            <div class="td">
+                <input class="form-control" formControlName="ProgramName">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="ProgramCode">
+            </div>
+
+            <div class="td">
+                <input class="form-control" formControlName="StartDate">
+                <input type="text" 
+                       placeholder="Datepicker" 
+                       class="form-control"   
+                       #dp="bsDatepicker"                 
+                       bsDatepicker
+                       [(ngModel)]="fg.get('StartDate').value"
+                       [bsConfig]="{ isAnimated: true, adaptivePosition: true,  dateInputFormat: 'YYYY-MM-DD'  }">
+                       
+            </div>
+            <div class="td">
+
+                <input class="form-control" formControlName="EndDate">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="Status">
+            </div>
+            <div class="td">
+                <button class="btn text-primary bt-lg" type="submit" [disabled]="fg.invalid">
+                    <i class="far" [ngClass]="(fg.get('Id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
+
+                </button>
+                <button class="btn text-danger" (click)="delete(fg.get('Id').value, i)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
