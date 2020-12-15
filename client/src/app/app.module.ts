@@ -20,6 +20,7 @@ import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
 import { GrantProgramComponent } from './grant-program/grant-program.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ReviewComponent } from './review/review.component';
 
 
 
@@ -34,7 +35,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TestErrorComponent,
     NavComponent,
     AdminComponent,
-    GrantProgramComponent
+    GrantProgramComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     HttpClientModule, 
     BrowserAnimationsModule, 
     BsDatepickerModule.forRoot(), 
+    BsDropdownModule.forRoot(), 
     FormsModule,
     ReactiveFormsModule, 
     ToastrModule.forRoot({

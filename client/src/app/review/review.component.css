@@ -15,6 +15,9 @@
 	
 	
 }
+input[readonly] {
+    background-color: white;
+  }
 .tbody
 {
 	display:table-row-group;
@@ -29,9 +32,7 @@
 	display:table-cell;
 	padding: 10px 1px 1px 5px;
 }
-.thead div.tr div.td:last-child{
-    background-color: #fff;
-}
+
 i:hover{
 	cursor: pointer;
 }

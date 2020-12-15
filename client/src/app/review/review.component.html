@@ -1,0 +1,38 @@
+<div class="grid-table">
+    <div class="thead" [@itemAnim]>
+        <div class="tr">
+            <div class="td">Applicant Name</div>
+            <div class="td">Program Code</div>
+            <div class="td">Country</div>
+            <div class="td">Application Status</div>
+            <div class="td">Reviewer Status</div>
+        </div>
+    </div>
+    <div class="tbody" [@listAnim]="1">
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of applicantList.controls" >
+            <div class="td">
+                <input class="form-control" formControlName="ApplicantName" [readonly]="true">
+                
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="ProgramCode" [readonly]="true">
+            </div>
+
+            <div class="td">
+                <input class="form-control" formControlName="Country" [readonly]="true">
+
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="ApplicationStatus" [readonly]="true">
+
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="ReviewerStatus"> 
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+

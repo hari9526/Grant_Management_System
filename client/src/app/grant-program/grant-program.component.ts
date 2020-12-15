@@ -1,21 +1,23 @@
 import { query, stagger, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { bigToNormalSmallAnimation, dropDown, dropUpAnimation } from '../animation';
+import { bigToNormalSmallAnimation, dropDown, dropUpAnimation, smallToNormal } from '../animation';
 import { GrantProgram } from '../_model/grantprogram';
 import { GrantProgramService } from '../_services/grant-program.service';
 
 @Component({
   selector: 'app-grant-program',
   templateUrl: './grant-program.component.html',
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }], 
   styleUrls: ['./grant-program.component.css'],
   animations: [
 
     trigger('itemAnim', [
       //Entry Animation
       transition('void=>*', [
-        useAnimation(bigToNormalSmallAnimation)
+        useAnimation(smallToNormal)
       ])
     ]),
     trigger('listAnim', [
@@ -36,14 +38,13 @@ import { GrantProgramService } from '../_services/grant-program.service';
 export class GrantProgramComponent implements OnInit {
   grantProgramForms: FormArray = this.fb.array([]);
   bsValue = new Date();
-  constructor(private fb: FormBuilder, private grantservice: GrantProgramService, private toaster: ToastrService) { }
+  constructor(private fb: FormBuilder, private grantservice: GrantProgramService, private toaster: ToastrService) { 
 
-  ngOnInit(): void {
-    // this.grantservice.getGrant().subscribe(response => {
+ // this.grantservice.getGrant().subscribe(response => {
     //   //this.grantProgramForms = response as FormArray;       
     // }); 
 
-
+console.log(this.grantProgramForms)
     this.grantservice.getGrant().subscribe(
       response => {
         if (response == null)
@@ -51,7 +52,7 @@ export class GrantProgramComponent implements OnInit {
         else {
           //We are generating formarray as per the data received from 
           //the api
-          console.log(response);
+        
           (response as []).forEach((grantProgram: GrantProgram) => {
             this.grantProgramForms.push(this.fb.group({
               Id: [grantProgram.id],
@@ -64,10 +65,15 @@ export class GrantProgramComponent implements OnInit {
             ));
           }
           );
-          console.log(this.grantProgramForms)
+  
         }
       }
     );
+
+  }
+
+  ngOnInit(): void {
+   
   }
 
 

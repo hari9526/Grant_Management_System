@@ -17,7 +17,7 @@ export class AccountService {
 
 
   constructor(private http: HttpClient, private toastr: ToastrService) {
-    console.log(this.currentUser$)
+
    }
 
   register(model: any) {
