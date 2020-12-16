@@ -1,10 +1,30 @@
 
+Basic CMD commands 
+
+mkdir foldername : create a new folder with name 'foldername' 
+cd  learningtech/dotnetcore  : for changing folders 
+e: : for moving to e disk. 
+
+Dotnet creating new projects in cli: 
+
+dotnet --info : Give info about the sdks installed. 
+dotnet -h : gives a list of all the commands avaliable 
+dotnet new: This will give list of project available 
+
+dotnet new sln : This will create a solution. Name of the solution is the folder name
+dotnet new webapi -o API : Creates an webapi project in a folder named API
+dotnet sln add API : Adds the project named API to our solution. 
+
+
 NugetPackages Required: 
 
 Microsoft.EntityFrameworkCore 
 Microsoft.EntityFrameworkCore.SqlServer or sqlite
 Microsoft.EntityFrameworkCore.Design
 Microsoft.AspNetCore.Authentication.JwtBear        For jwt auth 
+
+Microsoft.Extensions.Configuration.Json : In dataaccess layer
+Microsoft.EntityFrameworkCore.SqlServer : In data access
 
 
 
