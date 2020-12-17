@@ -1,6 +1,6 @@
 using data.Data;
-using data.Model;
 using Microsoft.EntityFrameworkCore;
+using models.DbModels;
 
 namespace data.Data
 {
@@ -35,8 +35,6 @@ namespace data.Data
         public DbSet<GrantProgram> GrantProgram {get;set;}
         public DbSet<ApplicantDetail> ApplicantDetails {get;set;}
         public DbSet<EducationDetail> EducationDetails {get;set;}
-        public DbSet<UserGrantMapping> UserGrantMappings {get;set;}
-        
-
+        public DbSet<UserGrantMapping> UserGrantMappings {get;set;}        
     }
 }

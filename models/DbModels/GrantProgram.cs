@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace data.Model
+namespace models.DbModels
 {
     public class GrantProgram
     {
-        public int Id { get; set; }
+         public int Id { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string ProgramName { get; set; }
         [Column(TypeName = "nvarchar(10)")]
@@ -18,6 +18,5 @@ namespace data.Model
         public bool Status { get; set; }
         [ForeignKey("GrantId")]
         public ICollection<UserGrantMapping> UserGrantMappings {get;set;}
-
     }
 }

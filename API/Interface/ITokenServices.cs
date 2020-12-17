@@ -1,6 +1,7 @@
 
 
-using API.Model;
+
+using models.DbModels;
 
 namespace API.Interface
 {

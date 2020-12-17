@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace data.Model
+namespace models.DbModels
 {
     public class ApplicantDetail
     {
@@ -33,6 +33,5 @@ namespace data.Model
         [Column(TypeName = "nvarchar(30)")]
         public string Phone { get; set; }
         public int EducationalDetailId { get; set; }
-
     }
 }

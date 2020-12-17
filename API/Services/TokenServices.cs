@@ -3,9 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using API.Interface;
-using API.Model;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using models.DbModels;
 
 namespace API.Services
 {

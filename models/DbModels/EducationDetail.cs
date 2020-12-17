@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace data.Model
+namespace models.DbModels
 {
     public class EducationDetail
     {
-        
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string CourseName { get; set; }
@@ -16,6 +15,5 @@ namespace data.Model
         public int YearOfCompletion { get; set; }
         [ForeignKey("EducationalDetailId")]
         public ICollection<ApplicantDetail> ApplicantDetails{get;set;}
-
     }
 }
