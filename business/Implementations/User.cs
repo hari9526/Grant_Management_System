@@ -34,6 +34,11 @@ namespace business.Implementations
 
         }
 
+        public Task<UserInfo> GetUserByEmail(string email)
+        {
+            return _userRepository.GetUserByEmail(email); 
+        }
+
         public Task<UserInfo> GetUserbyId(int id)
         {
             return _userRepository.GetUserbyId(id); 

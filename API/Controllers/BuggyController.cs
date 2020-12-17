@@ -1,7 +1,8 @@
-using API.Data;
-using API.Model;
+
+using data.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using models.DbModels;
 
 namespace API.Controllers
 {

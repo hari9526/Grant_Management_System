@@ -23,6 +23,11 @@ namespace data.Implementations
             return user; 
         }
 
+        public async Task<UserInfo> GetUserByEmail(string email)
+        {
+            return await _context.UserInfo.FirstOrDefaultAsync(x => x.UserName == email);
+        }
+
         public async Task<UserInfo> GetUserbyId(int id)
         {
             return await _context.UserInfo.FindAsync(id);

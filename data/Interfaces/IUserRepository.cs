@@ -11,5 +11,6 @@ namespace data.Interfaces
         Task<UserInfo> AddUser(UserInfo user); 
         Task<IEnumerable<UserInfo>> GetUsers();
         Task<bool> UserExists(string email); 
+        Task<UserInfo> GetUserByEmail (string email);
     }
 }

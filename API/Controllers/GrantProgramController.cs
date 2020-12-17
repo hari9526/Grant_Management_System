@@ -1,32 +1,35 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using API.Model;
+
 using System.Linq;
+using business.Interfaces;
+using models.DbModels;
 
 namespace API.Controllers
 {
     public class GrantProgramController : BaseController
     {
-        private readonly DataContext _context;
-        public GrantProgramController(DataContext context)
+     
+        private readonly IGrants _grants;
+        public GrantProgramController(IGrants grants)
         {
-            _context = context;
+            _grants = grants;
+        
 
         }
 
-        public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
-        {
-            return await _context.GrantProgram.ToListAsync();
-        }
+        // public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
+        // {
+        //     return await _grants.GetGrants().ToList();
+        // }
 
         [HttpPost]
         public async Task<ActionResult<GrantProgram>> SaveGrants(GrantProgram program)
         {
-            _context.GrantProgram.Add(program);
-            await _context.SaveChangesAsync();
+            await _grants.SaveGrants(program);
             //CreatedAtAction returns where, in which actionmethod, the pariticular 
             //created entry can be found as a header. Check the header tab in post and 
             //the location will give the url from which you can get the details of the 
@@ -38,7 +41,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GrantProgram>> GetGrants(int id)
         {
-            var grant = await _context.GrantProgram.FindAsync(id);
+            var grant = await _grants.GetGrantbyId(id); 
 
             if (grant == null)
             {
@@ -57,15 +60,14 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(program).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _grants.UpdateGrant(program); 
+                
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProgramExists(id))
+                if (!await _grants.ProgramExists(id))
                 {
                     return NotFound();
                 }
@@ -77,24 +79,17 @@ namespace API.Controllers
 
             return NoContent();
         }
-        private bool ProgramExists(int id)
-        {
-            return _context.GrantProgram.Any(e => e.Id == id);
-        }
-         // DELETE: api/BankAccount/5
+
+        // DELETE: api/BankAccount/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<GrantProgram>> DeleteProgram(int id)
         {
-            var program = await _context.GrantProgram.FindAsync(id);
+            var program = await _grants.GetGrantbyId(id); 
             if (program == null)
             {
                 return NotFound();
-            }
-
-            _context.GrantProgram.Remove(program);
-            await _context.SaveChangesAsync();
-
-            return program;
+            }        
+            return await _grants.DeleteGrant(program);
         }
     }
 

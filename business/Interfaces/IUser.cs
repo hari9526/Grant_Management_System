@@ -11,6 +11,7 @@ namespace business.Interfaces
         Task<UserInfo> GetUserbyId(int id); 
         Task<IEnumerable<UserInfo>> GetUsers(); 
         Task<bool> UserExists(string email);   
+        Task<UserInfo> GetUserByEmail (string email); 
 
     }
 }

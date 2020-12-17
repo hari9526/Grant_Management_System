@@ -1,8 +1,9 @@
-using API.Data;
+
 using API.Interface;
 using API.Services;
 using business.Implementations;
 using business.Interfaces;
+using data.Data;
 using data.Implementations;
 using data.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,9 @@ namespace API.Extensions
             services.AddScoped<ITokenServices, TokenServices>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUser, User>();
+            services.AddTransient<IGrants, Grants>();
+            services.AddTransient<IGrantsRepository, GrantsRepository>();
+
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnnectionString"))
             );
