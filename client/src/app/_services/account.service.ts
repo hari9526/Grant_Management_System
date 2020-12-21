@@ -53,7 +53,4 @@ export class AccountService {
   setCurrentUsers(user: User){
     this.currentUser.next(user); 
   }
-
-  
-
 }

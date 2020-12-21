@@ -1,14 +1,22 @@
 import { query, stagger, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { dropDown, smallToNormal } from '../animation';
+import { dropDown, dropDownDeepAndUp, smallToNormal } from '../animation';
+import { ReviewService } from '../_services/review.service';
+import { ReviewItem } from '../_model/review';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.css'],
   animations: [
-
+    trigger('noItemAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(dropDownDeepAndUp)
+      ])
+    ]),
     trigger('itemAnim', [
       //Entry Animation
       transition('void=>*', [
@@ -32,23 +40,46 @@ import { dropDown, smallToNormal } from '../animation';
 })
 export class ReviewComponent implements OnInit {
 
-  applicantList : FormArray = this.fb.array([]); 
+  applicantList: FormArray = this.fb.array([]);
+  emptyList: boolean = false;
 
-  constructor(private fb: FormBuilder ) {
-    this.AddApplicants(); 
-    console.log(this.applicantList.controls); 
-   }
+  constructor(private fb: FormBuilder, private reviewService: ReviewService, private toaster : ToastrService) {
+    this.GetApplicants();
+  }
 
   ngOnInit(): void {
   }
-  AddApplicants() {
-    this.applicantList.push(this.fb.group({
-      
-      ApplicantName: ['Steve'],
-      ProgramCode: ['Jobs'],
-      Country: ['India'],
-      ApplicationStatus: ['Approved'],
-      ReviewerStatus: ['Hello']
-    }));
+  GetApplicants() {
+    this.reviewService.getReviewDetails().subscribe(response => {
+      if (response == null)
+        this.emptyList = true;
+      else {
+        (response as []).forEach((review: ReviewItem) => {
+          this.applicantList.push(this.fb.group({
+            id: [review.id], 
+            applicantName: [review.applicantName],
+            programCode: [review.programCode],
+            country: [review.country],
+            applicationStatus: [review.applicationStatus],
+            reviewerStatus: [review.reviewerStatus]
+          }
+          ));
+        }
+        );
+      }
+    });
+    
   }
+  UpdateReview(formData: FormGroup){
+    this.reviewService.UpdateReview(formData).subscribe(response =>{
+      (response : any) =>{
+        this.toaster.success("Updated!")
+      }
+    }); 
+      
+  }
+
+
+
+
 }

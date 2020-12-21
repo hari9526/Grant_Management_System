@@ -18,10 +18,14 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenServices, TokenServices>();
-            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUser, User>();
             services.AddTransient<IGrants, Grants>();
+            services.AddTransient<IReview, Review>();
+
+            services.AddTransient<IUserRepository, UserRepository>();            
             services.AddTransient<IGrantsRepository, GrantsRepository>();
+            services.AddTransient<IReviewRepository, ReviewRepository>();
+
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnnectionString"))
             );

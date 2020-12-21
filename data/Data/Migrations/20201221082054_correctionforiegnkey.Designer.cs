@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using data.Data;
 
 namespace data.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201221082054_correctionforiegnkey")]
+    partial class correctionforiegnkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +50,9 @@ namespace data.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int>("GrantId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(30)");
 
@@ -66,6 +71,8 @@ namespace data.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EducationalDetailId");
+
+                    b.HasIndex("GrantId");
 
                     b.ToTable("ApplicantDetails");
                 });
@@ -196,6 +203,12 @@ namespace data.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("models.DbModels.GrantProgram", null)
+                        .WithMany("ApplicantDetails")
+                        .HasForeignKey("GrantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("models.DbModels.UserInfo", null)
                         .WithMany("ApplicantDetails")
                         .HasForeignKey("Id")
@@ -225,6 +238,8 @@ namespace data.Data.Migrations
 
             modelBuilder.Entity("models.DbModels.GrantProgram", b =>
                 {
+                    b.Navigation("ApplicantDetails");
+
                     b.Navigation("UserGrantMappings");
                 });
 

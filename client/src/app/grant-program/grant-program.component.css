@@ -1,3 +1,9 @@
+.image{
+    height:26em; background-size:cover; width:auto;
+    background-image:url('/assets/img/emptylist.jpg');
+    background-position:50% 50%;
+  }
+
 .grid-table
 {
 	display:table;

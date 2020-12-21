@@ -13,16 +13,10 @@ namespace API.Controllers
 {
     public class GrantProgramController : BaseController
     {
-
-        private readonly DataContext _context;
-
         private readonly IGrants _grants;
-        public GrantProgramController(IGrants grants, DataContext context)
-        {
-            _context = context;
+        public GrantProgramController(IGrants grants)
+        {     
             _grants = grants;
-
-
         }
 
         public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()

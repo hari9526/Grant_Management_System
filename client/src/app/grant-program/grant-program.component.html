@@ -1,4 +1,11 @@
-<div class="grid-table">
+<div class="container" *ngIf="emptyList" [@noItemAnim]>
+    <div class="image">
+
+    </div>
+
+</div>
+
+<div class="grid-table" *ngIf="!emptyList">
     <div class="thead">
         <div class="tr" [@itemAnim]>
             <div class="td">Program Name</div>
@@ -12,6 +19,7 @@
 
         </div>
     </div>
+
     <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
         <form class="tr" [formGroup]="fg" *ngFor="let fg of grantProgramForms.controls; let i = index"
             (submit)="recordSubmit(fg)">
@@ -47,10 +55,9 @@
                     </button>
                     <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"
                         aria-labelledby="button-animated">
-                        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Another</a>
-                        </li>
-                        
+                        <option [ngValue]="true">Active</option>
+                        <option [ngValue]="false">Not Active</option>
+
                     </ul>
                 </div> -->
 

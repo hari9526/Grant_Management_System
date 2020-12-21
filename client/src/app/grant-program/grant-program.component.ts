@@ -3,16 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { bigToNormalSmallAnimation, dropDown, dropUpAnimation, smallToNormal } from '../animation';
+import { bigToNormalSmallAnimation, dropDown, dropDownDeepAndUp, dropUpAnimation, smallToNormal } from '../animation';
 import { GrantProgram } from '../_model/grantprogram';
 import { GrantProgramService } from '../_services/grant-program.service';
 
 @Component({
   selector: 'app-grant-program',
   templateUrl: './grant-program.component.html',
-  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }], 
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }],
   styleUrls: ['./grant-program.component.css'],
   animations: [
+    trigger('noItemAnim', [
+      //Entry Animation
+      transition('void=>*', [
+        useAnimation(dropDownDeepAndUp)
+      ])
+    ]),
 
     trigger('itemAnim', [
       //Entry Animation
@@ -37,22 +43,27 @@ import { GrantProgramService } from '../_services/grant-program.service';
 })
 export class GrantProgramComponent implements OnInit {
   grantProgramForms: FormArray = this.fb.array([]);
+  emptyList: boolean = false; 
   bsValue = new Date();
-  constructor(private fb: FormBuilder, private grantservice: GrantProgramService, private toaster: ToastrService) { 
+  constructor(private fb: FormBuilder, private grantservice: GrantProgramService, private toaster: ToastrService) {
+    this.GetGrants(); 
+ 
 
- // this.grantservice.getGrant().subscribe(response => {
-    //   //this.grantProgramForms = response as FormArray;       
-    // }); 
+  }
 
-console.log(this.grantProgramForms)
+  ngOnInit(): void {
+
+  }
+  //For getting list of grants
+  GetGrants(){
     this.grantservice.getGrant().subscribe(
       response => {
         if (response == null)
-          this.AddGrantProgramForms();
+          this.emptyList = true; 
         else {
           //We are generating formarray as per the data received from 
           //the api
-        
+
           (response as []).forEach((grantProgram: GrantProgram) => {
             this.grantProgramForms.push(this.fb.group({
               Id: [grantProgram.id],
@@ -65,17 +76,11 @@ console.log(this.grantProgramForms)
             ));
           }
           );
-  
+
         }
       }
     );
-
   }
-
-  ngOnInit(): void {
-   
-  }
-
 
 
   AddGrantProgramForms() {
@@ -102,12 +107,8 @@ console.log(this.grantProgramForms)
         (response: any) => {
           this.toaster.success("Edited Successfully!");
         }
-
       );
-
     }
-
-
   }
   delete(Id, i) {
     if (Id == 0) {
@@ -117,13 +118,9 @@ console.log(this.grantProgramForms)
       this.grantservice.deleteGrant(Id).subscribe(
         (response: any) => {
           this.grantProgramForms.removeAt(i);
-          this.toaster.success("Deletion success!")
+          this.toaster.success("Deletion success!"); 
         }
       )
-
     }
-
-
-
   }
 }

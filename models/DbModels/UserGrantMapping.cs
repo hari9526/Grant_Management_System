@@ -5,5 +5,7 @@ namespace models.DbModels
         public int Id { get; set; }
         public int UserId { get; set; }
         public int GrantId { get; set; }
+        public bool ReviewerStatus {get;set;}
+        public string ApplicationStatus {get;set;}
     }
 }

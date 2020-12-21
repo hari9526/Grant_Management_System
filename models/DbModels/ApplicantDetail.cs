@@ -8,7 +8,7 @@ namespace models.DbModels
     {
         [Key]
         public int Id { get; set; }
-        public int GrantId { get; set; }
+     
         [Column(TypeName = "nvarchar(30)")]
         public string FirstName { get; set; }
         [Column(TypeName = "nvarchar(30)")]

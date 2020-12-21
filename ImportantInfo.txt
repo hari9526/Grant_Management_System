@@ -75,6 +75,7 @@ ng g s serviceName : For creating servie classes
 ng g interceptor interceptorName : For creating interceptor
 
 ng analytics project off : To disable analytics informations sent to Google. 
+ng g guard guardName : For creating guards 
 
 
 Important Modules: 
