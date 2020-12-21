@@ -1,4 +1,5 @@
 
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -12,9 +13,9 @@
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
+    padding: 0px;
+    width: 100%;
+    max-width: 80%;
     position: relative;
     padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
@@ -24,12 +25,10 @@
   /* Tabs */
 .tab-header{
     text-align: center;
+    color: #0062CC;
 }
 
-  .tab-header h2.active {
-    color: #0062CC;
-    border-bottom: 4px solid #0062CC;
-  }
+ 
 
   .tab-header h2 {
     text-align: center;
@@ -38,16 +37,12 @@
     display:inline-block;
     padding: 30px 40px 10px 40px;
     cursor: pointer;
-    color: #545d6a;
-    border-bottom: 2px solid #630505;
+    color: #0062CC;
+    border-bottom: 2px solid #0062CC;
   }
 
   .tab-header h2:focus {
       outline: none;
-  }
-
-  form{
-      margin: 0px 16px;
   }
 
   

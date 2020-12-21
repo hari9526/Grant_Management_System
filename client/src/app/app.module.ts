@@ -17,10 +17,10 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NavComponent } from './nav/nav.component';
-import { AdminComponent } from './admin/admin.component';
 import { GrantProgramComponent } from './grant-program/grant-program.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReviewComponent } from './review/review.component';
+import { ApplicantComponent } from './applicant/applicant.component';
 
 
 
@@ -34,9 +34,9 @@ import { ReviewComponent } from './review/review.component';
     ServerErrorComponent,
     TestErrorComponent,
     NavComponent,
-    AdminComponent,
     GrantProgramComponent,
-    ReviewComponent
+    ReviewComponent,
+    ApplicantComponent
   ],
   imports: [
     BrowserModule,

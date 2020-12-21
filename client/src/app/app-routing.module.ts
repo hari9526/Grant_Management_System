@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
+import { ApplicantComponent } from './applicant/applicant.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'test-error', component: TestErrorComponent },
   { path: 'server-error', component: ServerErrorComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'applicant', component: ApplicantComponent },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: 'grant-program', component: GrantProgramComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }
