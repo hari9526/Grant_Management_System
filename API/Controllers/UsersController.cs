@@ -17,11 +17,11 @@ namespace API.Controllers
         }
         // [Authorize]
         // //Gets the list of users
-        // public async Task<ActionResult<IEnumerable<UserInfo>>> GetUser()
-        // {
+        public async Task<ActionResult<IEnumerable<UserInfo>>> GetUser()
+        {
 
-        //     return await _user.GetUsers().tolist();
-        // }
+            return new ActionResult<IEnumerable<UserInfo>>(await _user.GetUsers());
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserInfo>> GetUser(int id)

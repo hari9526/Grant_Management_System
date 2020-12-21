@@ -7,24 +7,29 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using business.Interfaces;
 using models.DbModels;
+using data.Data;
 
 namespace API.Controllers
 {
     public class GrantProgramController : BaseController
     {
-     
+
+        private readonly DataContext _context;
+
         private readonly IGrants _grants;
-        public GrantProgramController(IGrants grants)
+        public GrantProgramController(IGrants grants, DataContext context)
         {
+            _context = context;
             _grants = grants;
-        
+
 
         }
 
-        // public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
-        // {
-        //     return await _grants.GetGrants().ToList();
-        // }
+        public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
+        {
+            //return await _context.GrantProgram.ToListAsync();
+            return new ActionResult<IEnumerable<GrantProgram>>(await _grants.GetGrants());
+        }
 
         [HttpPost]
         public async Task<ActionResult<GrantProgram>> SaveGrants(GrantProgram program)
@@ -41,7 +46,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GrantProgram>> GetGrants(int id)
         {
-            var grant = await _grants.GetGrantbyId(id); 
+            var grant = await _grants.GetGrantbyId(id);
 
             if (grant == null)
             {
@@ -62,8 +67,8 @@ namespace API.Controllers
 
             try
             {
-                await _grants.UpdateGrant(program); 
-                
+                await _grants.UpdateGrant(program);
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,11 +89,11 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<GrantProgram>> DeleteProgram(int id)
         {
-            var program = await _grants.GetGrantbyId(id); 
+            var program = await _grants.GetGrantbyId(id);
             if (program == null)
             {
                 return NotFound();
-            }        
+            }
             return await _grants.DeleteGrant(program);
         }
     }

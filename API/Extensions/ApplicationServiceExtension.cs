@@ -22,7 +22,6 @@ namespace API.Extensions
             services.AddTransient<IUser, User>();
             services.AddTransient<IGrants, Grants>();
             services.AddTransient<IGrantsRepository, GrantsRepository>();
-
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnnectionString"))
             );

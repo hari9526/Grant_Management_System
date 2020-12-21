@@ -6,7 +6,7 @@ namespace data.Interfaces
 {
     public interface IGrantsRepository
     {
-         Task<IEnumerable<GrantProgram>> GetGrants(); 
+        Task<IEnumerable<GrantProgram>> GetGrants(); 
         Task<GrantProgram> SaveGrants(GrantProgram program); 
         Task<GrantProgram> GetGrantbyId(int id); 
         Task<GrantProgram> UpdateGrant(GrantProgram program); 
