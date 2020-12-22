@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'; 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { GrantProgramComponent } from './grant-program/grant-program.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReviewComponent } from './review/review.component';
 import { ApplicantComponent } from './applicant/applicant.component';
+import { EducationComponent } from './education/education.component';
+
 
 
 
@@ -36,7 +38,8 @@ import { ApplicantComponent } from './applicant/applicant.component';
     NavComponent,
     GrantProgramComponent,
     ReviewComponent,
-    ApplicantComponent
+    ApplicantComponent,
+    EducationComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { ApplicantComponent } from './applicant/applicant.component';
     BrowserAnimationsModule, 
     BsDatepickerModule.forRoot(), 
     BsDropdownModule.forRoot(), 
+    TooltipModule.forRoot(),
     FormsModule,
     ReactiveFormsModule, 
     ToastrModule.forRoot({

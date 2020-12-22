@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using data.Data;
 
-namespace data.Data.Migrations
+namespace data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201221062745_ReviewAndApplication")]
-    partial class ReviewAndApplication
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,17 +39,11 @@ namespace data.Data.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("EducationalDetailId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("GrantId")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(30)");
@@ -70,8 +62,6 @@ namespace data.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EducationalDetailId");
-
                     b.ToTable("ApplicantDetails");
                 });
 
@@ -81,6 +71,9 @@ namespace data.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int>("ApplicantId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(30)");
@@ -95,6 +88,8 @@ namespace data.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
 
                     b.ToTable("EducationDetails");
                 });
@@ -195,15 +190,18 @@ namespace data.Data.Migrations
 
             modelBuilder.Entity("models.DbModels.ApplicantDetail", b =>
                 {
-                    b.HasOne("models.DbModels.EducationDetail", null)
-                        .WithMany("ApplicantDetails")
-                        .HasForeignKey("EducationalDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("models.DbModels.UserInfo", null)
                         .WithMany("ApplicantDetails")
                         .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("models.DbModels.EducationDetail", b =>
+                {
+                    b.HasOne("models.DbModels.UserInfo", null)
+                        .WithMany("EducationDetails")
+                        .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -223,11 +221,6 @@ namespace data.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("models.DbModels.EducationDetail", b =>
-                {
-                    b.Navigation("ApplicantDetails");
-                });
-
             modelBuilder.Entity("models.DbModels.GrantProgram", b =>
                 {
                     b.Navigation("UserGrantMappings");
@@ -236,6 +229,8 @@ namespace data.Data.Migrations
             modelBuilder.Entity("models.DbModels.UserInfo", b =>
                 {
                     b.Navigation("ApplicantDetails");
+
+                    b.Navigation("EducationDetails");
 
                     b.Navigation("UserGrantMappings");
                 });

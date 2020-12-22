@@ -1,7 +1,9 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
+import { EducationComponent } from '../education/education.component';
 
 @Component({
   selector: 'app-applicant',
@@ -23,14 +25,20 @@ import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '..
 
   ]
 })
+
 export class ApplicantComponent implements OnInit {
-  buttonTextApplicant : string = "Partially Submit?"; 
+  buttonTextApplicant : string = "Save & Continue"; 
   isLoading : boolean  = false; 
   formModelEducation: FormArray = this.fb.array([]);
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router : Router) { 
+    this.InitializeEducationalDetails(); 
+   
+    
+  }
 
   ngOnInit(): void {
+
   }
   formModelApplicant = this.fb.group({
     GrantProgram : ['', Validators.required], 
@@ -62,11 +70,30 @@ export class ApplicantComponent implements OnInit {
     }
   }
 
-  
+  InitializeEducationalDetails(){
+    this.formModelEducation.push(this.fb.group({
+      id : [0], 
+      applicantId : [0],       
+      courseName : ['', Validators.required], 
+      country : ['', Validators.required], 
+      institutionName : ['', Validators.required], 
+      yearOfCompletion : [0, Validators.required]
+    }));
+    debugger; 
+  }
 
-  
 
-  onSubmit(){}
+
+  onSubmitApplicant(){}
+
+  UpdateEducation(fg: FormGroup){}
+  delete(id: number){
+
+  }
+
+  goToEducation(){
+    this.router.navigateByUrl("/education"); 
+  }
 
 
 }

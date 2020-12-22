@@ -51,7 +51,8 @@ export class ReviewComponent implements OnInit {
   }
   GetApplicants() {
     this.reviewService.getReviewDetails().subscribe(response => {
-      if (response == null)
+      debugger
+      if (Object.keys(response).length === 0) 
         this.emptyList = true;
       else {
         (response as []).forEach((review: ReviewItem) => {
@@ -75,11 +76,6 @@ export class ReviewComponent implements OnInit {
       (response : any) =>{
         this.toaster.success("Updated!")
       }
-    }); 
-      
+    });       
   }
-
-
-
-
 }

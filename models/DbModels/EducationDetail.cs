@@ -6,6 +6,7 @@ namespace models.DbModels
     public class EducationDetail
     {
         public int Id { get; set; }
+        public int ApplicantId {get;set;}
         [Column(TypeName = "nvarchar(30)")]
         public string CourseName { get; set; }
         [Column(TypeName = "nvarchar(30)")]
@@ -13,7 +14,6 @@ namespace models.DbModels
         [Column(TypeName = "nvarchar(40)")]
         public string InstitutionName { get; set; }
         public int YearOfCompletion { get; set; }
-        [ForeignKey("EducationalDetailId")]
-        public ICollection<ApplicantDetail> ApplicantDetails{get;set;}
+
     }
 }

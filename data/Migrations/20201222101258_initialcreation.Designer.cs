@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using data.Data;
 
-namespace data.Data.Migrations
+namespace data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201216090451_RemainingTablesCreated")]
-    partial class RemainingTablesCreated
+    [Migration("20201222101258_initialcreation")]
+    partial class initialcreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace data.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("data.Model.ApplicantDetail", b =>
+            modelBuilder.Entity("models.DbModels.ApplicantDetail", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -41,17 +41,11 @@ namespace data.Data.Migrations
                     b.Property<bool>("Disabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("EducationalDetailId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("GrantId")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(30)");
@@ -70,10 +64,39 @@ namespace data.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApplicantDetail");
+                    b.ToTable("ApplicantDetails");
                 });
 
-            modelBuilder.Entity("data.Model.GrantProgram", b =>
+            modelBuilder.Entity("models.DbModels.EducationDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("CourseName")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int>("YearOfCompletion")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicantId");
+
+                    b.ToTable("EducationDetails");
+                });
+
+            modelBuilder.Entity("models.DbModels.GrantProgram", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,15 +123,21 @@ namespace data.Data.Migrations
                     b.ToTable("GrantProgram");
                 });
 
-            modelBuilder.Entity("data.Model.UserGrantMapping", b =>
+            modelBuilder.Entity("models.DbModels.UserGrantMapping", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("ApplicationStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GrantId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ReviewerStatus")
+                        .HasColumnType("bit");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -119,10 +148,10 @@ namespace data.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserGrantMapping");
+                    b.ToTable("UserGrantMappings");
                 });
 
-            modelBuilder.Entity("data.Model.UserInfo", b =>
+            modelBuilder.Entity("models.DbModels.UserInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,38 +190,49 @@ namespace data.Data.Migrations
                     b.ToTable("UserInfo");
                 });
 
-            modelBuilder.Entity("data.Model.ApplicantDetail", b =>
+            modelBuilder.Entity("models.DbModels.ApplicantDetail", b =>
                 {
-                    b.HasOne("data.Model.UserInfo", null)
+                    b.HasOne("models.DbModels.UserInfo", null)
                         .WithMany("ApplicantDetails")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("data.Model.UserGrantMapping", b =>
+            modelBuilder.Entity("models.DbModels.EducationDetail", b =>
                 {
-                    b.HasOne("data.Model.GrantProgram", null)
+                    b.HasOne("models.DbModels.UserInfo", null)
+                        .WithMany("EducationDetails")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("models.DbModels.UserGrantMapping", b =>
+                {
+                    b.HasOne("models.DbModels.GrantProgram", null)
                         .WithMany("UserGrantMappings")
                         .HasForeignKey("GrantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("data.Model.UserInfo", null)
+                    b.HasOne("models.DbModels.UserInfo", null)
                         .WithMany("UserGrantMappings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("data.Model.GrantProgram", b =>
+            modelBuilder.Entity("models.DbModels.GrantProgram", b =>
                 {
                     b.Navigation("UserGrantMappings");
                 });
 
-            modelBuilder.Entity("data.Model.UserInfo", b =>
+            modelBuilder.Entity("models.DbModels.UserInfo", b =>
                 {
                     b.Navigation("ApplicantDetails");
+
+                    b.Navigation("EducationDetails");
 
                     b.Navigation("UserGrantMappings");
                 });

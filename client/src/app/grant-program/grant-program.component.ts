@@ -58,8 +58,8 @@ export class GrantProgramComponent implements OnInit {
   GetGrants(){
     this.grantservice.getGrant().subscribe(
       response => {
-        if (response == null)
-          this.emptyList = true; 
+        if ( Object.keys(response).length === 0)
+          this.AddGrantProgramForms(); 
         else {
           //We are generating formarray as per the data received from 
           //the api

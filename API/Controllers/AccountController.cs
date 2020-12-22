@@ -29,6 +29,7 @@ namespace API.Controllers
             var newUser =  await _user.AddUser(userDetails); 
             var userDto = new UserDto
             {
+                Id = newUser.Id,  
                 FirstName = userDetails.FirstName,
                 LastName = userDetails.LastName,
                 Email = userDetails.Email,
@@ -52,6 +53,7 @@ namespace API.Controllers
                 return Unauthorized("Invalid Password");
             return new UserDto
             {
+                Id = user.Id, 
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.UserName,

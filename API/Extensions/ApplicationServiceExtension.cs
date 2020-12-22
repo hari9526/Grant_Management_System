@@ -21,10 +21,13 @@ namespace API.Extensions
             services.AddTransient<IUser, User>();
             services.AddTransient<IGrants, Grants>();
             services.AddTransient<IReview, Review>();
+            services.AddTransient<IEducation, Education>();
+            
 
             services.AddTransient<IUserRepository, UserRepository>();            
             services.AddTransient<IGrantsRepository, GrantsRepository>();
             services.AddTransient<IReviewRepository, ReviewRepository>();
+            services.AddTransient<IEducationDetailsRepository, EducationDetailsRepository>();
 
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnnectionString"))

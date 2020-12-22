@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ namespace models.DbModels
 {
     public class ApplicantDetail
     {
-        [Key]
+      
         public int Id { get; set; }
      
         [Column(TypeName = "nvarchar(30)")]
@@ -32,6 +33,6 @@ namespace models.DbModels
         public string Mobile { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string Phone { get; set; }
-        public int EducationalDetailId { get; set; }
+        
     }
 }

@@ -26,5 +26,7 @@ namespace models.DbModels
         public ICollection<ApplicantDetail> ApplicantDetails{get;set;}
         [ForeignKey("UserId")]
         public ICollection<UserGrantMapping> UserGrantMappings{get;set;}
+        [ForeignKey("ApplicantId")]
+        public ICollection<EducationDetail> EducationDetails { get; set; }
     }
 }

@@ -4,7 +4,7 @@
         <div class="row" [@formAnim]>
             <div class="col-md-10 offset-md-1">
 
-                <form [formGroup]="formModelApplicant" autocomplete="off" (submit)="onSubmit()" >
+                <form [formGroup]="formModelApplicant" autocomplete="off" (submit)="onSubmitApplicant()">
 
                     <!-- <div class="tab-header">
                         <h2>Grant Details</h2>
@@ -46,10 +46,12 @@
                         <label>Email</label>
                         <input class="form-control" formControlName="Email">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.email">Invalid email
+                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.email">Invalid
+                            email
                             address.</label>
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.required">This field
+                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.required">This
+                            field
                             is
                             mandatory.</label>
                     </div>
@@ -80,14 +82,28 @@
                     </div>
                     <div class="form-group required mb-0">
                         <label>Physically disabled?</label>
-                        <input class="form-control" formControlName="PhysicallyDisabled">
+
+
+                        <div class="form-check" formControlName="PhysicallyDisabled">
+                            <input class="form-check-input" type="radio" [value]="true">
+                            <label class="form-check-label">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [value]="false">
+                            <label class="form-check-label">
+                                No
+                            </label>
+                        </div>
+
                         <label class="text-danger"
                             *ngIf="formModelApplicant.get('PhysicallyDisabled').touched && formModelApplicant.get('PhysicallyDisabled').errors?.required">This
                             field is mandatory.</label>
                     </div>
 
 
-                    <div class="tab-header" >
+                    <div class="tab-header">
                         <h2>Contact Details</h2>
                     </div>
                     <div class="form-group required mb-0">
@@ -133,20 +149,28 @@
 
                     <div class="form-row mt-4">
                         <div class="form-group col-md-8 offset-md-2 mt-3">
-                            <button type="submit" class="btn btn-primary active btn-lg btn-block"
-                                [disabled]="!formModelApplicant.valid"><img *ngIf="isLoading" style="width :30px"
-                                    src="assets/img/Loader.gif">{{buttonTextApplicant}}</button>
+                            <button type="submit"
+                                tooltip="If you want you can stop here. If you do so your application would be in Submitted status. If you fill the remaining status it would be in Completed status."
+                                class="btn btn-primary active btn-lg btn-block" [disabled]="!formModelApplicant.valid">
+                                <img *ngIf="isLoading" style="width :30px" src="assets/img/Loader.gif">
+                                {{buttonTextApplicant}}
+                            </button>
+
+                            <button class="btn btn-link btn-block" (click)="goToEducation()">Click to add Education details</button>
+                            <router-outlet></router-outlet> 
                         </div>
+                        
                     </div>
                 </form>
 
-                
-                <div class="tab-header" >
-                    <h2>Educational Details</h2>
-                </div>
 
+                
+
+              
 
             </div>
+
+            
         </div>
     </div>
 </div>

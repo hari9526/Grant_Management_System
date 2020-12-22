@@ -22,7 +22,7 @@ namespace API.Controllers
 
         }
         [HttpPost]
-        public async Task<ReviewDto> UpdateReview(ReviewDto review)
+        public async Task<ActionResult<ReviewDto>> UpdateReview(ReviewDto review)
         {
             return await _review.UpdateReview(review); 
         }

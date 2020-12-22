@@ -42,7 +42,7 @@ namespace data.Implementations
 
         public async Task<GrantProgram> SaveGrants(GrantProgram program)
         {
-            _context.GrantProgram.Add(program);
+            await _context.GrantProgram.AddAsync(program);
             await _context.SaveChangesAsync();
             return program;
         }
