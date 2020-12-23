@@ -73,10 +73,8 @@ export class EducationComponent implements OnInit {
               yearOfCompletion : [education.yearOfCompletion]
             }
             ));
-
           }
           );
-
         }
       });
   }

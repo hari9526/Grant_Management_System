@@ -29,5 +29,21 @@ namespace data.Implementations
             await _context.SaveChangesAsync(); 
             return details; 
         }
+
+        public async Task<EducationDetail> Delete(EducationDetail details)
+        {
+            _context.EducationDetails.Remove(details); 
+            await _context.SaveChangesAsync(); 
+            return details;
+            
+        }
+
+        public Task<EducationDetail> Update(EducationDetail details)
+        {
+            return await details; 
+        }
     }
+
+        
+
 }
