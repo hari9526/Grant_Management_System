@@ -63,8 +63,8 @@ export class GrantProgramComponent implements OnInit {
         else {
           //We are generating formarray as per the data received from 
           //the api
-
-          (response as []).forEach((grantProgram: GrantProgram) => {
+          //map and forEach are the same. For iterating through a collection. 
+          (response as []).map((grantProgram: GrantProgram) => {
             this.grantProgramForms.push(this.fb.group({
               Id: [grantProgram.id],
               ProgramName: [grantProgram.programName, Validators.required],

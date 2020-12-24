@@ -38,9 +38,9 @@ namespace data.Implementations
             
         }
 
-        public Task<EducationDetail> Update(EducationDetail details)
+        Task<EducationDetail> IEducationDetailsRepository.Update(EducationDetail details)
         {
-            return await details; 
+            throw new System.NotImplementedException();
         }
     }
 
