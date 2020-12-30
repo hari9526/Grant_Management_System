@@ -1,4 +1,4 @@
-<div class="grid-table ml-5">
+<div class="grid-table">
     <div class="thead">
         <div class="tr">
             <div class="td">Course Name</div>
@@ -34,7 +34,7 @@
                     <i class="far" [ngClass]="(fgroup.get('id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
 
                 </button>
-                <button class="btn text-danger" tooltip="Delete" type="submit" (click)="delete(fgroup.get('id').value, i)"  >
+                <button class="btn text-danger ml-0" tooltip="Delete" type="submit" (click)="delete(fgroup.get('id').value, i)"  >
                     <i class="far fa-trash-alt"></i>
                 </button>
             </div>
