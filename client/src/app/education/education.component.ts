@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dropDown } from '../animation';
 import { EducationService } from '../_services/education.service';
 import { EducationDetails } from '../_model/educationDetails';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-education',
@@ -28,8 +29,10 @@ import { EducationDetails } from '../_model/educationDetails';
 export class EducationComponent implements OnInit {
   formModelEducation: FormArray = this.fb.array([]);
 
-  constructor(private fb: FormBuilder, private educationService: EducationService) {
-    this.GetDetails(); 
+  constructor(private fb: FormBuilder,
+    private educationService: EducationService,
+    private toastr: ToastrService) {
+    this.GetDetails();
   }
 
   ngOnInit(): void {
@@ -37,11 +40,40 @@ export class EducationComponent implements OnInit {
 
   onSubmitApplicant() { }
 
-  UpdateEducation(fg: FormGroup) {
+  submit(fg: FormGroup) {
+    debugger; 
+    if (fg.value.id == 0) {
+      this.educationService.saveDetail(fg.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          fg.patchValue({ id: response.id });
+          fg.patchValue({ applicantId: response.applicantId });
+          this.toastr.success("Details Added!");
+        }
+      );
+
+    }
+    else {
+      this.educationService.editDetail(fg.value).subscribe(
+        (response: any) => { this.toastr.success("Edited!"); }
+      );
+    }
+
 
 
   }
-  delete(id: number) {
+  delete(Id, i) {
+    if(Id == 0 )
+      this.formModelEducation.removeAt(i); 
+    else if(confirm("Do you want to delete?")){
+      
+      this.educationService.delete(Id).subscribe(
+        (response : any) => {        
+          this.formModelEducation.removeAt(i); 
+          this.toastr.success("Deleted!"); 
+        }
+      ); 
+    }
 
   }
   InitializeEducationalDetails() {
@@ -59,18 +91,18 @@ export class EducationComponent implements OnInit {
   GetDetails() {
     this.educationService.getEducationDetails().subscribe(
       response => {
- 
+
         if (Object.keys(response).length === 0)
           this.InitializeEducationalDetails();
         else {
           (response as []).forEach((education: EducationDetails) => {
             this.formModelEducation.push(this.fb.group({
-              id : [education.id], 
-              applicantId : [education.applicantId], 
-              courseName : [education.courseName], 
-              country : [education.country], 
-              institutionName : [education.institutionName], 
-              yearOfCompletion : [education.yearOfCompletion]
+              id: [education.id],
+              applicantId: [education.applicantId],
+              courseName: [education.courseName],
+              country: [education.country],
+              institutionName: [education.institutionName],
+              yearOfCompletion: [education.yearOfCompletion]
             }
             ));
           }

@@ -19,31 +19,39 @@ namespace data.Implementations
         }
         public async Task<IEnumerable<EducationDetail>> GetDetails(int applicantId)
         {
-            var result = await _context.EducationDetails.Where( x=> x.ApplicantId == applicantId).ToListAsync();     
-            return result; 
+            var result = await _context.EducationDetails.Where(x => x.ApplicantId == applicantId).ToListAsync();
+            return result;
         }
 
         public async Task<EducationDetail> SaveDetails(EducationDetail details)
         {
-            await _context.EducationDetails.AddAsync(details); 
-            await _context.SaveChangesAsync(); 
-            return details; 
+            await _context.EducationDetails.AddAsync(details);
+            await _context.SaveChangesAsync();
+            return details;
+        }
+        public async Task<EducationDetail> GetDetailById(int id)
+        {
+            return await _context.EducationDetails.FindAsync(id);
         }
 
         public async Task<EducationDetail> Delete(EducationDetail details)
         {
-            _context.EducationDetails.Remove(details); 
-            await _context.SaveChangesAsync(); 
+            _context.EducationDetails.Remove(details);
+            await _context.SaveChangesAsync();
             return details;
-            
+
         }
 
-        Task<EducationDetail> IEducationDetailsRepository.Update(EducationDetail details)
+        public async Task<EducationDetail> Update(EducationDetail details)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(details).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return details;
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.EducationDetails.AnyAsync(x => x.Id == id);
         }
     }
-
-        
-
 }

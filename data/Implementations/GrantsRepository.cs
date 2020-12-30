@@ -49,6 +49,10 @@ namespace data.Implementations
 
         public async Task<GrantProgram> UpdateGrant(GrantProgram program)
         {
+            //Here, we say that the row is changed. I think, EF Core recognises 
+            //the row based on the primary key value. Since we don't specify which property 
+            //in the row changed, all properties of the row is updated. 
+            //If the primary key is not present in the object, then a new row is inserted. 
             _context.Entry(program).State = EntityState.Modified; 
             await _context.SaveChangesAsync(); 
             return program; 

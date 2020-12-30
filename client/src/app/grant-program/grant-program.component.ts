@@ -45,7 +45,9 @@ export class GrantProgramComponent implements OnInit {
   grantProgramForms: FormArray = this.fb.array([]);
   emptyList: boolean = false; 
   bsValue = new Date();
-  constructor(private fb: FormBuilder, private grantservice: GrantProgramService, private toaster: ToastrService) {
+  constructor(private fb: FormBuilder, 
+              private grantservice: GrantProgramService, 
+              private toaster: ToastrService) {
     this.GetGrants(); 
  
 
@@ -94,6 +96,7 @@ export class GrantProgramComponent implements OnInit {
     }));
   }
   recordSubmit(fg: FormGroup) {
+    debugger
     if (fg.value.Id == 0) {
       this.grantservice.postGrant(fg.value).subscribe(
         (response: any) => {
@@ -102,6 +105,7 @@ export class GrantProgramComponent implements OnInit {
         }
       );
     }
+
     else {
       this.grantservice.putGrant(fg.value).subscribe(
         (response: any) => {
@@ -115,6 +119,7 @@ export class GrantProgramComponent implements OnInit {
       this.grantProgramForms.removeAt(i);
     }
     else if (confirm("Sure you want to delete?")) {
+      debugger
       this.grantservice.deleteGrant(Id).subscribe(
         (response: any) => {
           this.grantProgramForms.removeAt(i);

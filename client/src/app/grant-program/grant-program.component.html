@@ -26,7 +26,7 @@
     <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
         <form class="tr" [formGroup]="fg" 
             *ngFor="let fg of grantProgramForms.controls; let i = index"
-            (submit)="recordSubmit(fg)">
+            >
             <div class="td">
                 <input class="form-control" formControlName="ProgramName">
             </div>
@@ -68,7 +68,7 @@
 
             </div>
             <div class="td">
-                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fg.invalid">
+                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fg.invalid" (click)="recordSubmit(fg)">
                     <i class="far" [ngClass]="(fg.get('Id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
 
                 </button>

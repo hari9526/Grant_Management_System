@@ -15,7 +15,7 @@ namespace API.Controllers
     {
         private readonly IGrants _grants;
         public GrantProgramController(IGrants grants)
-        {     
+        {
             _grants = grants;
         }
 
@@ -55,39 +55,20 @@ namespace API.Controllers
         public async Task<IActionResult> PutGrantProgram(int id, GrantProgram program)
         {
             if (id != program.Id)
-            {
                 return BadRequest();
-            }
-
-            try
-            {
-                await _grants.UpdateGrant(program);
-
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await _grants.ProgramExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _grants.UpdateGrant(program);            
             return NoContent();
         }
 
         // DELETE: api/BankAccount/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]    
         public async Task<ActionResult<GrantProgram>> DeleteProgram(int id)
         {
             var program = await _grants.GetGrantbyId(id);
-            if (program == null)
-            {
-                return NotFound();
-            }
+            // if (program == null)
+            // {
+            //     return NotFound();
+            // }
             return await _grants.DeleteGrant(program);
         }
     }

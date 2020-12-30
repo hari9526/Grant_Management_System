@@ -17,9 +17,11 @@ export class GrantProgramService {
     return this.http.post(environment.baseUrl + "grantprogram", formData ); 
   }
   putGrant(formData){
+
     return this.http.put(environment.baseUrl + "grantprogram/" + formData.Id, formData ); 
   }
   deleteGrant(id){
+    debugger
     return this.http.delete(environment.baseUrl + "grantprogram/" + id); 
   }
 }

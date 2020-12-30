@@ -9,7 +9,10 @@ namespace data.Interfaces
     {
         Task<EducationDetail> SaveDetails(EducationDetail details); 
         Task<IEnumerable<EducationDetail>> GetDetails(int applicantId); 
+        Task<EducationDetail> GetDetailById(int id); 
         Task<EducationDetail> Delete(EducationDetail details); 
         Task<EducationDetail> Update(EducationDetail details); 
+        Task<bool> Exists (int id); 
+
     }
 }
