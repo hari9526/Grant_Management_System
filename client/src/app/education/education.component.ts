@@ -17,7 +17,7 @@ import { AccountService } from '../_services/account.service';
 
         query(':enter', style({ opacity: 0 }), { optional: true }),
 
-        query(':enter', stagger('80ms', [
+        query(':enter', stagger('160ms', [
           useAnimation(dropDown)]), { optional: true }),
 
         // query(':leave', stagger('50ms', [

@@ -2,6 +2,10 @@ input[readonly] {
   background-color: white;
 }
 
+.form-align{
+  margin-left: 19px;
+  margin-right: 19px;
+}
 
   .grid-table
   {
