@@ -1,4 +1,5 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,8 +7,11 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
 import { ApplicantDetail } from '../_model/applicantDetail';
+import { GrantProgram } from '../_model/grantprogram';
+import { UserGrantMapping } from '../_model/userGrantMapping';
 import { AccountService } from '../_services/account.service';
 import { ApplicantdetailsService } from '../_services/applicantdetails.service';
+import { GrantProgramService } from '../_services/grant-program.service';
 
 
 @Component({
@@ -37,15 +41,20 @@ export class ApplicantComponent implements OnInit {
   userId: number = 0;
   formData: FormGroup;
   applicantDetails: ApplicantDetail;
+  grantApplied : UserGrantMapping; 
+  grantArrayList: GrantProgram[] = [];
+  
 
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private applicantService: ApplicantdetailsService,
-    private accountService: AccountService, 
-    private toastr : ToastrService) {
+    private accountService: AccountService,
+    private toastr: ToastrService,
+    private grantservice: GrantProgramService) {
     this.currentUserId();
     this.getApplicantDetails();
+    this.getGrantList();
 
   }
 
@@ -53,12 +62,23 @@ export class ApplicantComponent implements OnInit {
 
   }
 
+  getGrantList() {
+    this.grantservice.getGrant().subscribe(response => {
+      (response as []).map((grantList: GrantProgram) =>
+        this.grantArrayList.push(grantList))
+    });
+
+  }
+
+
   currentUserId() {
     this.accountService.currentUser$.subscribe(x => {
       this.userId = x.id;
       return this.userId;
     });
   }
+
+
   initializeForm() {
     this.formData = this.fb.group({
       Id: [0],
@@ -86,7 +106,7 @@ export class ApplicantComponent implements OnInit {
         else {
           this.formData = this.fb.group({
             Id: [response.id],
-            GrantProgram: ['', Validators.required],
+            GrantProgram: [0, Validators.required],
             FirstName: [response.firstName, [Validators.required]],
             LastName: [response.lastName, [Validators.required]],
             Email: [response.email, [Validators.required, Validators.email]],
@@ -128,12 +148,11 @@ export class ApplicantComponent implements OnInit {
       phone: this.formData.value.Phone
 
     }
+    console.log(this.formData.value.GrantProgram)
     this.applicantService.saveApplicantDetails(this.applicantDetails, this.userId)
       .subscribe(
         (response: any) => {
-          this.isLoading = false;
-          this.buttonTextApplicant = "Update again?"
-          this.toastr.success("Updated!"); 
+          this.saveGrantProgramDetails();        
         },
         (error: any) => {
           this.isLoading = false;
@@ -142,6 +161,31 @@ export class ApplicantComponent implements OnInit {
 
       );
   }
+
+  saveGrantProgramDetails(){
+  
+    this.grantApplied = {
+      userId : this.userId, 
+      grantId : parseInt(this.formData.value.GrantProgram)
+    }
+    console.log("HI" + this.grantApplied.grantId)
+    this.applicantService.saveGrantDetails(this.grantApplied).subscribe(
+       
+      (response : any ) => {
+        this.isLoading = false;
+        this.buttonTextApplicant = "Update again?"
+        this.toastr.success("Updated!");
+      }, 
+      (error: any) => {
+        this.isLoading = false;
+        this.buttonTextApplicant = "Try again?"
+      }
+      
+    )
+    debugger;
+
+  }
+  
 
 
 

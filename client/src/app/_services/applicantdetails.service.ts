@@ -16,5 +16,10 @@ export class ApplicantdetailsService {
   saveApplicantDetails(formData, id){
     return this.http.put(environment.baseUrl + "applicant/" + id, formData); 
   }
-  
+
+  saveGrantDetails(userGrantMapping){
+    debugger;
+    return this.http.post(environment.baseUrl + "applicant/grantdetails", userGrantMapping); 
+
+  }
 }

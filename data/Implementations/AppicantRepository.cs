@@ -3,6 +3,7 @@ using data.Data;
 using data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using models.DbModels;
+using models.DTOs;
 
 namespace data.Implementations
 {
@@ -14,6 +15,12 @@ namespace data.Implementations
             _context = context;
 
         }
+
+        public async Task<bool> DidApplicantAlreadyApply(UserGrantMappingDto mappingDto)
+        {
+            return await _context.UserGrantMappings.AnyAsync(x=>x.UserId == mappingDto.UserId && x.GrantId == mappingDto.GrantId); 
+        }
+
         public async Task<ApplicantDetail> Get(int userId)
         {
            return await  _context.ApplicantDetails.FindAsync(userId);
@@ -25,6 +32,14 @@ namespace data.Implementations
             await _context.ApplicantDetails.AddAsync(detail); 
             await _context.SaveChangesAsync(); 
             return detail; 
+        }
+
+        public async Task<UserGrantMapping> SaveGrantDetails(UserGrantMapping mappingDetails)
+        {
+            await _context.UserGrantMappings.AddAsync(mappingDetails); 
+            await _context.SaveChangesAsync(); 
+            return mappingDetails;
+
         }
 
         public async Task<ApplicantDetail> Update(ApplicantDetail detail)

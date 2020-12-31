@@ -14,5 +14,7 @@ namespace data.Interfaces
         Task<EducationDetail> Update(EducationDetail details); 
         Task<bool> Exists (int id); 
 
+        Task<bool> EducationDetailsExistsForApplicant(int applicantId); 
+
     }
 }

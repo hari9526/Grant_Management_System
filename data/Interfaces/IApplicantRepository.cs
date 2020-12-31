@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using models.DbModels;
+using models.DTOs;
 
 namespace data.Interfaces
 {
@@ -8,7 +9,8 @@ namespace data.Interfaces
         Task<ApplicantDetail> Get(int userId); 
         Task<ApplicantDetail> Save(ApplicantDetail detail); 
         Task<ApplicantDetail> Update(ApplicantDetail detail); 
+        Task<UserGrantMapping> SaveGrantDetails(UserGrantMapping mappingDetails);
 
-        
+          Task<bool> DidApplicantAlreadyApply(UserGrantMappingDto mappingDto);
     }
 }

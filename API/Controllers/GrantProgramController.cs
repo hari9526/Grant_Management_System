@@ -8,6 +8,7 @@ using System.Linq;
 using business.Interfaces;
 using models.DbModels;
 using data.Data;
+using System;
 
 namespace API.Controllers
 {
@@ -28,6 +29,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<GrantProgram>> SaveGrants(GrantProgram program)
         {
+            //     var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+            //    if (program.StartDate.HasValue && program.EndDate.HasValue)
+            //    {
+            //        program.StartDate = DateTime.SpecifyKind((DateTime)(program.StartDate + offset), DateTimeKind.Utc);
+            //        program.EndDate = DateTime.SpecifyKind((DateTime)(program.EndDate + offset), DateTimeKind.Utc);
+            //    }
             var result = await _grants.SaveGrants(program);
             //CreatedAtAction returns where, in which actionmethod, the pariticular 
             //created entry can be found as a header. Check the header tab in post and 
@@ -40,8 +47,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GrantProgram>> GetGrants(int id)
         {
-           return await _grants.GetGrantbyId(id);
-                    
+            return await _grants.GetGrantbyId(id);
+
         }
 
         // PUT: api/GrantProgram/5

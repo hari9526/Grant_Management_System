@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using models.DbModels;
+using models.DTOs;
 
 namespace API.Controllers
 {
@@ -17,7 +18,7 @@ namespace API.Controllers
         public async Task<ActionResult<ApplicantDetail>> GetDetails(int userId)
         {
             return await _applicant.Get(userId);
-           
+
         }
 
 
@@ -30,12 +31,21 @@ namespace API.Controllers
         [HttpPut("{applicantId}")]
         public async Task<ActionResult<ApplicantDetail>> UpdateDetails(int applicantId, ApplicantDetail detail)
         {
-            if(applicantId != detail.Id)
-                return BadRequest(); 
-            return await _applicant.Update(detail); 
+            if (applicantId != detail.Id)
+                return BadRequest();
+            return await _applicant.Update(detail);
         }
 
+        [HttpPost("grantDetails")]
+        public async Task<ActionResult<UserGrantMapping>> GrantDetails(UserGrantMappingDto mappingDto)
+        {
+            if(await _applicant.DidApplicantAlreadyApply(mappingDto))
+                return BadRequest("You have already applied for this grant!"); 
+                
+            //saves to usergrant mapping table
+            return await _applicant.GrantDetails(mappingDto); 
 
+        }
 
     }
 }

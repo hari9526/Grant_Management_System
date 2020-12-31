@@ -53,5 +53,10 @@ namespace data.Implementations
         {
             return await _context.EducationDetails.AnyAsync(x => x.Id == id);
         }
+
+        public async Task<bool> EducationDetailsExistsForApplicant(int applicantId)
+        {
+            return await _context.EducationDetails.AnyAsync(x => x.ApplicantId == applicantId);
+        }
     }
 }
