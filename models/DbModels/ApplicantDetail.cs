@@ -16,8 +16,8 @@ namespace models.DbModels
         public string LastName { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string Email { get; set; }
-        [Column(TypeName = "Date")]
-        public DateTime DateOfBirth { get; set; }
+        [Column(TypeName = "Date")]        
+        public DateTime? DateOfBirth { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string Country { get; set; }
         [Column(TypeName = "nvarchar(30)")]

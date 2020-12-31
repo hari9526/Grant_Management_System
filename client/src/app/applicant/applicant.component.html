@@ -4,7 +4,7 @@
         <div class="row" [@formAnim]>
             <div class="col-lg-10 offset-md-1">
 
-                <form [formGroup]="formModelApplicant" autocomplete="off" (submit)="onSubmitApplicant()">
+                <form [formGroup]="formData" autocomplete="off" (submit)="saveApplicant()">
 
                     <!-- <div class="tab-header">
                         <h2>Grant Details</h2>
@@ -28,14 +28,14 @@
                         <label>First Name</label>
                         <input class="form-control" formControlName="FirstName">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('FirstName').touched && formModelApplicant.get('FirstName').errors?.required">This
+                            *ngIf="formData.get('FirstName').touched && formData.get('FirstName').errors?.required">This
                             field is mandatory.</label>
                     </div>
                     <div class="form-group required mb-0">
                         <label>Last Name</label>
                         <input class="form-control" formControlName="LastName">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('LastName').touched && formModelApplicant.get('LastName').errors?.required">This
+                            *ngIf="formData.get('LastName').touched && formData.get('LastName').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -43,11 +43,11 @@
                         <label>Email</label>
                         <input class="form-control" formControlName="Email">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.email">Invalid
+                            *ngIf="formData.get('Email').touched && formData.get('Email').errors?.email">Invalid
                             email
                             address.</label>
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Email').touched && formModelApplicant.get('Email').errors?.required">This
+                            *ngIf="formData.get('Email').touched && formData.get('Email').errors?.required">This
                             field
                             is
                             mandatory.</label>
@@ -66,7 +66,7 @@
                         <label>Country</label>
                         <input class="form-control" formControlName="Country">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('FirstName').touched && formModelApplicant.get('FirstName').errors?.required">This
+                            *ngIf="formData.get('FirstName').touched && formData.get('FirstName').errors?.required">This
                             field is mandatory.</label>
                     </div>
 
@@ -74,7 +74,7 @@
                         <label>State</label>
                         <input class="form-control" formControlName="State">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('FirstName').touched && formModelApplicant.get('FirstName').errors?.required">This
+                            *ngIf="formData.get('FirstName').touched && formData.get('FirstName').errors?.required">This
                             field is mandatory.</label>
                     </div>
                     <div class="form-group required mb-0">
@@ -95,7 +95,7 @@
                         </div>
 
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('PhysicallyDisabled').touched && formModelApplicant.get('PhysicallyDisabled').errors?.required">This
+                            *ngIf="formData.get('PhysicallyDisabled').touched && formData.get('PhysicallyDisabled').errors?.required">This
                             field is mandatory.</label>
                     </div>
 
@@ -107,7 +107,7 @@
                         <label>Address</label>
                         <input class="form-control" formControlName="Address">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Address').touched && formModelApplicant.get('Address').errors?.required">This
+                            *ngIf="formData.get('Address').touched && formData.get('Address').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -115,7 +115,7 @@
                         <label>City</label>
                         <input class="form-control" formControlName="City">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('City').touched && formModelApplicant.get('City').errors?.required">This
+                            *ngIf="formData.get('City').touched && formData.get('City').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -123,7 +123,7 @@
                         <label>Postal Code</label>
                         <input class="form-control" formControlName="PostalCode">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('PostalCode').touched && formModelApplicant.get('PostalCode').errors?.required">This
+                            *ngIf="formData.get('PostalCode').touched && formData.get('PostalCode').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -131,7 +131,7 @@
                         <label>Mobile</label>
                         <input class="form-control" formControlName="Mobile">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Mobile').touched && formModelApplicant.get('Mobile').errors?.required">This
+                            *ngIf="formData.get('Mobile').touched && formData.get('Mobile').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -139,7 +139,7 @@
                         <label>Phone</label>
                         <input class="form-control" formControlName="Phone">
                         <label class="text-danger"
-                            *ngIf="formModelApplicant.get('Phone').touched && formModelApplicant.get('Phone').errors?.required">This
+                            *ngIf="formData.get('Phone').touched && formData.get('Phone').errors?.required">This
                             field
                             is mandatory.</label>
                     </div>
@@ -156,7 +156,7 @@
                         <div class="form-group col-md-8 offset-md-2 mt-3 mb-5">
                             <button type="submit"
                                 tooltip="If you want you can stop here. If you do so your application would be in Submitted status. If you fill the remaining status it would be in Completed status."
-                                class="btn btn-primary active btn-lg btn-block" [disabled]="!formModelApplicant.valid">
+                                class="btn btn-primary active btn-lg btn-block" [disabled]="!formData.valid">
                                 <img *ngIf="isLoading" style="width :30px" src="assets/img/Loader.gif">
                                 {{buttonTextApplicant}}
                             </button>

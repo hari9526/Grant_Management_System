@@ -61,7 +61,7 @@ export class GrantProgramComponent implements OnInit {
     this.grantservice.getGrant().subscribe(
       response => {
         if ( Object.keys(response).length === 0)
-          this.AddGrantProgramForms(); 
+          this.InitializeGrantProgramForms(); 
         else {
           //We are generating formarray as per the data received from 
           //the api
@@ -85,7 +85,7 @@ export class GrantProgramComponent implements OnInit {
   }
 
 
-  AddGrantProgramForms() {
+  InitializeGrantProgramForms() {
     this.grantProgramForms.push(this.fb.group({
       Id: [0],
       ProgramName: ['', Validators.required],

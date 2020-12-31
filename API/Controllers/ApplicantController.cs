@@ -16,10 +16,8 @@ namespace API.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<ApplicantDetail>> GetDetails(int userId)
         {
-            var result = await _applicant.Get(userId);
-            if (result == null)
-                return NotFound();
-            return result;
+            return await _applicant.Get(userId);
+           
         }
 
 

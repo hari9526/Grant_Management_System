@@ -9,7 +9,7 @@ export class ApplicantdetailsService {
 
   constructor(private http : HttpClient) { }
 
-  getApplicantDetails(){
-    this.http.get(environment.baseUrl + ""); 
+  getApplicantDetails(id){
+    return this.http.get(environment.baseUrl + "applicant/" + id); 
   }
 }

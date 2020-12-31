@@ -8,17 +8,17 @@ import { AccountService } from './account.service';
 })
 export class EducationService {
 
-  userId : number = 0; 
+  
   constructor(private http: HttpClient, private acccountService : AccountService) { }
 
-  getEducationDetails(){
-    this.currentUserId()   
-    return this.http.get(environment.baseUrl + "education/" + this.userId);    
+  getEducationDetails(userId){
+   console.log(userId)
+    return this.http.get(environment.baseUrl + "education/" + userId);    
   }
 
-  saveDetail(formData){
-    this.currentUserId(); 
-    formData.applicantId = this.userId; 
+  saveDetail(formData, userId){
+   
+    formData.applicantId = userId; 
     return this.http.post(environment.baseUrl + "education/save", formData); 
   }
 
@@ -30,10 +30,4 @@ export class EducationService {
     return this.http.delete(environment.baseUrl + "education/" + id); 
   }
 
-  currentUserId(){    
-    this.acccountService.currentUser$.subscribe(x=> { 
-      this.userId = x.id; 
-      return this.userId;
-    });     
-  }
 }

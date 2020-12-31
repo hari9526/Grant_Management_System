@@ -40,10 +40,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GrantProgram>> GetGrants(int id)
         {
-            var grant = await _grants.GetGrantbyId(id);
-            if (grant == null)
-                return NotFound();
-            return grant;
+           return await _grants.GetGrantbyId(id);
+                    
         }
 
         // PUT: api/GrantProgram/5
