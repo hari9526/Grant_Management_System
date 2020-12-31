@@ -2,6 +2,8 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
 import { ApplicantDetail } from '../_model/applicantDetail';
 import { AccountService } from '../_services/account.service';
@@ -34,12 +36,14 @@ export class ApplicantComponent implements OnInit {
   isLoading: boolean = false;
   userId: number = 0;
   formData: FormGroup;
+  applicantDetails: ApplicantDetail;
 
 
   constructor(private fb: FormBuilder,
     private router: Router,
     private applicantService: ApplicantdetailsService,
-    private accountService: AccountService) {
+    private accountService: AccountService, 
+    private toastr : ToastrService) {
     this.currentUserId();
     this.getApplicantDetails();
 
@@ -96,7 +100,7 @@ export class ApplicantComponent implements OnInit {
             Mobile: [response.mobile, [Validators.required]],
             Phone: [response.phone, [Validators.required]]
           });
-          console.log(this.formData); 
+          console.log(this.formData);
         }
 
       }
@@ -105,7 +109,39 @@ export class ApplicantComponent implements OnInit {
   }
 
 
-  saveApplicant() { }
+  saveApplicant() {
+    this.isLoading = true;
+    this.buttonTextApplicant = "Saving Details...";
+    this.applicantDetails = {
+      id: this.formData.value.Id,
+      firstName: this.formData.value.FirstName,
+      lastName: this.formData.value.LastName,
+      email: this.formData.value.Email,
+      dateOfBirth: this.formData.value.DateOfBirth,
+      country: this.formData.value.Country,
+      state: this.formData.value.State,
+      disabled: this.formData.value.PhysicallyDisabled,
+      address: this.formData.value.Address,
+      city: this.formData.value.City,
+      postalCode: this.formData.value.PostalCode,
+      mobile: this.formData.value.Mobile,
+      phone: this.formData.value.Phone
+
+    }
+    this.applicantService.saveApplicantDetails(this.applicantDetails, this.userId)
+      .subscribe(
+        (response: any) => {
+          this.isLoading = false;
+          this.buttonTextApplicant = "Update again?"
+          this.toastr.success("Updated!"); 
+        },
+        (error: any) => {
+          this.isLoading = false;
+          this.buttonTextApplicant = "Try again?"
+        }
+
+      );
+  }
 
 
 

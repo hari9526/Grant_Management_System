@@ -12,4 +12,9 @@ export class ApplicantdetailsService {
   getApplicantDetails(id){
     return this.http.get(environment.baseUrl + "applicant/" + id); 
   }
+
+  saveApplicantDetails(formData, id){
+    return this.http.put(environment.baseUrl + "applicant/" + id, formData); 
+  }
+  
 }

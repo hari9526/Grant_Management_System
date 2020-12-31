@@ -22,7 +22,7 @@ namespace models.DbModels
         public string Country { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string State { get; set; }
-        public bool Disabled { get; set; }
+        public bool? Disabled { get; set; }
         [Column(TypeName = "nvarchar(60)")]
         public string Address { get; set; }
         [Column(TypeName = "nvarchar(30)")]
