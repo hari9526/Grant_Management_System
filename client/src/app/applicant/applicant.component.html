@@ -13,8 +13,9 @@
                         <div class="form-group mb-4 required mb-0">
                             <label>Grant program</label>
 
-                            <select class="form-control" formControlName="GrantProgram" placeholder="test">                                
-                                <option *ngFor="let item of grantArrayList" value="{{item.id}}">{{item.programName}}</option>
+                            <select class="form-control" formControlName="GrantProgram">
+                                <option *ngFor="let item of grantArrayList" value="{{item.id}}">{{item.programName}}
+                                </option>
                             </select>
 
 

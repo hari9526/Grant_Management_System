@@ -41,9 +41,10 @@ export class ApplicantComponent implements OnInit {
   userId: number = 0;
   formData: FormGroup;
   applicantDetails: ApplicantDetail;
-  grantApplied : UserGrantMapping; 
+  grantApplied: UserGrantMapping;
   grantArrayList: GrantProgram[] = [];
   
+
 
 
   constructor(private fb: FormBuilder,
@@ -152,7 +153,7 @@ export class ApplicantComponent implements OnInit {
     this.applicantService.saveApplicantDetails(this.applicantDetails, this.userId)
       .subscribe(
         (response: any) => {
-          this.saveGrantProgramDetails();        
+          this.saveGrantProgramDetails();
         },
         (error: any) => {
           this.isLoading = false;
@@ -162,30 +163,30 @@ export class ApplicantComponent implements OnInit {
       );
   }
 
-  saveGrantProgramDetails(){
-  
+  saveGrantProgramDetails() {
+
     this.grantApplied = {
-      userId : this.userId, 
-      grantId : parseInt(this.formData.value.GrantProgram)
+      userId: this.userId,
+      grantId: parseInt(this.formData.value.GrantProgram)
     }
     console.log("HI" + this.grantApplied.grantId)
     this.applicantService.saveGrantDetails(this.grantApplied).subscribe(
-       
-      (response : any ) => {
+
+      (response: any) => {
         this.isLoading = false;
         this.buttonTextApplicant = "Update again?"
         this.toastr.success("Updated!");
-      }, 
+      },
       (error: any) => {
         this.isLoading = false;
         this.buttonTextApplicant = "Try again?"
       }
-      
+
     )
     debugger;
 
   }
-  
+
 
 
 
