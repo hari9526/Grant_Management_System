@@ -44,8 +44,7 @@ export class EducationComponent implements OnInit {
     debugger; 
     if (fg.value.id == 0) {
       this.educationService.saveDetail(fg.value).subscribe(
-        (response: any) => {
-          console.log(response);
+        (response: any) => {     
           fg.patchValue({ id: response.id });
           fg.patchValue({ applicantId: response.applicantId });
           this.toastr.success("Details Added!");
