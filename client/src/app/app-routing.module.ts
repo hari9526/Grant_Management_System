@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'test-error', component: TestErrorComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'applicant', component: ApplicantComponent },
-  { path: 'education', component: EducationComponent },
+  // { path: 'education', component: EducationComponent },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: 'grant-program', component: GrantProgramComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }

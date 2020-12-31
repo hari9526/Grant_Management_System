@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using business.Interfaces;
 using models.DTOs;
 using data.Data;
+using models.DbModels;
 
 namespace API.Controllers
 {
@@ -14,11 +15,13 @@ namespace API.Controllers
     {
         private readonly ITokenServices _tokenService;
         private readonly IUser _user;
-        public AccountController(ITokenServices tokenService, IUser user)
+        private readonly IApplicant _applicant;
+        public AccountController(ITokenServices tokenService, IUser user, IApplicant applicant)
         {
+            _applicant = applicant;
             _user = user;
             _tokenService = tokenService;
-           
+
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto userDetails)
@@ -26,10 +29,10 @@ namespace API.Controllers
             if (await _user.UserExists(userDetails.Email))
                 return BadRequest("Email already exists!");
             //Adding user to the database
-            var newUser =  await _user.AddUser(userDetails); 
+            var newUser = await _user.AddUser(userDetails);
             var userDto = new UserDto
             {
-                Id = newUser.Id,  
+                Id = newUser.Id,
                 FirstName = userDetails.FirstName,
                 LastName = userDetails.LastName,
                 Email = userDetails.Email,
@@ -39,10 +42,21 @@ namespace API.Controllers
                 UpdatedById = newUser.UpdatedById,
                 UserType = newUser.UserType,
                 Token = _tokenService.CreateToken(newUser)
-            };       
+            };
+            //Save userinfo to applicant table if the usertype is an applicant. 
+            if(userDto.UserType == "Applicant"){
+                var applicantDetails = new ApplicantDetail{
+                    Id = userDto.Id, 
+                    FirstName = userDto.FirstName, 
+                    LastName = userDto.LastName, 
+                    Email = userDto.Email
+                }; 
+                await _applicant.Save(applicantDetails); 
+            }
+
             return userDto;
         }
-   
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDetails)
         {
@@ -53,7 +67,7 @@ namespace API.Controllers
                 return Unauthorized("Invalid Password");
             return new UserDto
             {
-                Id = user.Id, 
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.UserName,

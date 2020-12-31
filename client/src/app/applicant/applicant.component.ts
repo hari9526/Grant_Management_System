@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
-import { EducationComponent } from '../education/education.component';
+
 
 @Component({
   selector: 'app-applicant',
@@ -19,7 +19,7 @@ import { EducationComponent } from '../education/education.component';
     trigger('formAnim', [
       //Entry Animation
       transition('void=>*', [
-        useAnimation(smallToNormal)
+        useAnimation(dropDownDeepAndUp)
       ])
     ])
 
@@ -27,13 +27,11 @@ import { EducationComponent } from '../education/education.component';
 })
 
 export class ApplicantComponent implements OnInit {
-  buttonTextApplicant : string = "Save & Continue"; 
+  buttonTextApplicant : string = "Save details"; 
   isLoading : boolean  = false; 
   formModelEducation: FormArray = this.fb.array([]);
 
   constructor(private fb: FormBuilder, private router : Router) { 
-    this.InitializeEducationalDetails(); 
-   
     
   }
 
@@ -44,11 +42,7 @@ export class ApplicantComponent implements OnInit {
     GrantProgram : ['', Validators.required], 
     FirstName: ['', [Validators.required]],
     LastName: ['', [Validators.required]],
-    Email: ['', [Validators.required, Validators.email]],
-    Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(4)]],
-      ConfirmPassword: ['', [Validators.required]]
-    }, { validator: this.ComparePasswords }), 
+    Email: ['', [Validators.required, Validators.email]], 
     DateOfBirth : ['', [Validators.required]], 
     Country : ['', [Validators.required]], 
     State : ['', [Validators.required]], 
@@ -60,40 +54,16 @@ export class ApplicantComponent implements OnInit {
     Phone : ['', [Validators.required]]
   })
 
-  ComparePasswords(fb: FormGroup) {
-    let confirmPasswordCtrl = fb.get('ConfirmPassword');
-    if (confirmPasswordCtrl.errors == null || 'passwordMismatch' in confirmPasswordCtrl.errors) {
-      if (confirmPasswordCtrl.value != fb.get('Password').value)
-        confirmPasswordCtrl.setErrors({ passwordMismatch: true });
-      else
-        confirmPasswordCtrl.setErrors(null);
-    }
+  initializeForm(){
+    
   }
 
-  InitializeEducationalDetails(){
-    this.formModelEducation.push(this.fb.group({
-      id : [0], 
-      applicantId : [0],       
-      courseName : ['', Validators.required], 
-      country : ['', Validators.required], 
-      institutionName : ['', Validators.required], 
-      yearOfCompletion : [0, Validators.required]
-    }));
-    debugger; 
-  }
+
 
 
 
   onSubmitApplicant(){}
 
-  UpdateEducation(fg: FormGroup){}
-  delete(id: number){
-
-  }
-
-  goToEducation(){
-    this.router.navigateByUrl("/education"); 
-  }
 
 
 }

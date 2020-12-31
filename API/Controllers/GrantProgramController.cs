@@ -28,12 +28,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<GrantProgram>> SaveGrants(GrantProgram program)
         {
-            await _grants.SaveGrants(program);
+            var result = await _grants.SaveGrants(program);
             //CreatedAtAction returns where, in which actionmethod, the pariticular 
             //created entry can be found as a header. Check the header tab in post and 
             //the location will give the url from which you can get the details of the 
             //newly created entry. This is a RESTApi standard. 
-            return CreatedAtAction("GetGrants", new { id = program.Id }, program);
+            return CreatedAtAction("GetGrants", new { id = result.Id }, result);
         }
 
 
@@ -41,12 +41,8 @@ namespace API.Controllers
         public async Task<ActionResult<GrantProgram>> GetGrants(int id)
         {
             var grant = await _grants.GetGrantbyId(id);
-
             if (grant == null)
-            {
                 return NotFound();
-            }
-
             return grant;
         }
 
@@ -56,12 +52,12 @@ namespace API.Controllers
         {
             if (id != program.Id)
                 return BadRequest();
-            await _grants.UpdateGrant(program);            
+            await _grants.UpdateGrant(program);
             return NoContent();
         }
 
         // DELETE: api/BankAccount/5
-        [HttpDelete("{id}")]    
+        [HttpDelete("{id}")]
         public async Task<ActionResult<GrantProgram>> DeleteProgram(int id)
         {
             var program = await _grants.GetGrantbyId(id);
