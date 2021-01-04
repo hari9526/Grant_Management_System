@@ -10,6 +10,7 @@ import { ReviewComponent } from './review/review.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserComponent } from './user/user.component';
+import { ApplicantGuard } from './_guards/applicant.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoggedInGuard } from './_guards/logged-in.guard';
 
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'test-error', component: TestErrorComponent },
   { path: 'server-error', component: ServerErrorComponent },
-  { path: 'applicant', component: ApplicantComponent },
+  { path: 'applicant', component: ApplicantComponent, canActivate : [ApplicantGuard] },
   // { path: 'education', component: EducationComponent },
   { path: 'review', component: ReviewComponent, canActivate: [AuthGuard] },
   { path: 'grant-program', component: GrantProgramComponent, canActivate: [AuthGuard] },

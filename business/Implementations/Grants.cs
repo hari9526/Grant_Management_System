@@ -46,5 +46,10 @@ namespace business.Implementations
         {
             return await _grantRepository.ProgramExists(id); 
         }
+
+        public async Task<IEnumerable<GrantProgram>> GetActiveGrants()
+        {
+            return await _grantRepository.GetActiveGrants();
+        }
     }
 }

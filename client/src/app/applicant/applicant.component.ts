@@ -43,7 +43,7 @@ export class ApplicantComponent implements OnInit {
   applicantDetails: ApplicantDetail;
   grantApplied: UserGrantMapping;
   grantArrayList: GrantProgram[] = [];
-  
+
 
 
 
@@ -64,7 +64,7 @@ export class ApplicantComponent implements OnInit {
   }
 
   getGrantList() {
-    this.grantservice.getGrant().subscribe(response => {
+    this.grantservice.getActiveGrant().subscribe(response => {
       (response as []).map((grantList: GrantProgram) =>
         this.grantArrayList.push(grantList))
     });
@@ -100,28 +100,31 @@ export class ApplicantComponent implements OnInit {
   }
 
   getApplicantDetails() {
+    debugger
     this.applicantService.getApplicantDetails(this.userId).subscribe(
       (response: ApplicantDetail) => {
         if (response == null)
           this.initializeForm();
         else {
-          this.formData = this.fb.group({
-            Id: [response.id],
-            GrantProgram: [0, Validators.required],
-            FirstName: [response.firstName, [Validators.required]],
-            LastName: [response.lastName, [Validators.required]],
-            Email: [response.email, [Validators.required, Validators.email]],
-            DateOfBirth: [response.dateOfBirth, [Validators.required]],
-            Country: [response.country, [Validators.required]],
-            State: [response.state, [Validators.required]],
-            PhysicallyDisabled: [response.disabled, [Validators.required]],
-            Address: [response.address, [Validators.required]],
-            City: [response.city, [Validators.required]],
-            PostalCode: [response.postalCode, [Validators.required]],
-            Mobile: [response.mobile, [Validators.required]],
-            Phone: [response.phone, [Validators.required]]
-          });
+            this.formData= 
+            this.fb.group({
+              Id: [response.id],
+              GrantProgram: [0, Validators.required],
+              FirstName: [response.firstName, [Validators.required]],
+              LastName: [response.lastName, [Validators.required]],
+              Email: [response.email, [Validators.required, Validators.email]],
+              DateOfBirth: [response.dateOfBirth, [Validators.required]],
+              Country: [response.country, [Validators.required]],
+              State: [response.state, [Validators.required]],
+              PhysicallyDisabled: [response.disabled, [Validators.required]],
+              Address: [response.address, [Validators.required]],
+              City: [response.city, [Validators.required]],
+              PostalCode: [response.postalCode, [Validators.required]],
+              Mobile: [response.mobile, [Validators.required]],
+              Phone: [response.phone, [Validators.required]]
+            });
           console.log(this.formData);
+          debugger
         }
 
       }
@@ -182,9 +185,7 @@ export class ApplicantComponent implements OnInit {
         this.buttonTextApplicant = "Try again?"
       }
 
-    )
-    debugger;
-
+    );
   }
 
 

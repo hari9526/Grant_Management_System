@@ -15,7 +15,7 @@ namespace models.DbModels
         public DateTime StartDate { get; set; }
         // [Column(TypeName = "Date")]
         public DateTime EndDate { get; set; }
-        public bool Status { get; set; }
+        public bool? Status { get; set; }
         [ForeignKey("GrantId")]
         public ICollection<UserGrantMapping> UserGrantMappings { get; set; }
       

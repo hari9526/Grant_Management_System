@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using data.Data;
 using data.Interfaces;
@@ -24,6 +25,11 @@ namespace data.Implementations
 
         }
 
+        public async Task<IEnumerable<GrantProgram>> GetActiveGrants()
+        {
+            var result = await _context.GrantProgram.Where(x=>x.Status == true).ToListAsync(); 
+            return result; 
+        }
 
         public async Task<GrantProgram> GetGrantbyId(int id)
         {

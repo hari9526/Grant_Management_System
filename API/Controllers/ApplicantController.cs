@@ -28,6 +28,8 @@ namespace API.Controllers
             var result = await _applicant.Save(detail);
             return CreatedAtAction("GetDetails", new { userId = result.Id }, result);
         }
+
+
         [HttpPut("{applicantId}")]
         public async Task<ActionResult<ApplicantDetail>> UpdateDetails(int applicantId, ApplicantDetail detail)
         {
@@ -39,9 +41,12 @@ namespace API.Controllers
         [HttpPost("grantDetails")]
         public async Task<ActionResult<UserGrantMapping>> GrantDetails(UserGrantMappingDto mappingDto)
         {
+            //If the user doesn't add grant details 
+            if(mappingDto.GrantId == 0 || mappingDto.UserId == 0)
+                return NoContent();
+
             if(await _applicant.DidApplicantAlreadyApply(mappingDto))
-                return BadRequest("You have already applied for this grant!"); 
-                
+                return BadRequest("You have already applied for this grant!");                 
             //saves to usergrant mapping table
             return await _applicant.GrantDetails(mappingDto); 
 

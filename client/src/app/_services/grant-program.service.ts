@@ -13,6 +13,10 @@ export class GrantProgramService {
     return this.http.get(environment.baseUrl + "grantprogram"); 
   }
 
+  getActiveGrant(){
+    return this.http.get(environment.baseUrl + "grantprogram/active"); 
+  }
+
   postGrant(formData){
     return this.http.post(environment.baseUrl + "grantprogram", formData ); 
   }

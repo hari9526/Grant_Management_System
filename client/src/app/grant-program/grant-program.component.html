@@ -51,19 +51,11 @@
 
             </div>
             <div class="td">
-                <input class="form-control" formControlName="Status">
-                <!-- <div class="btn-group form-control" formControlName="Status" dropdown>
-                    <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
-                        aria-controls="dropdown-animated">
-                        Select status <span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"
-                        aria-labelledby="button-animated">
-                        <option [ngValue]="true">Active</option>
-                        <option [ngValue]="false">Not Active</option>
-
-                    </ul>
-                </div> -->
+               
+                <select  class="form-control" formControlName="Status">
+                    <option [ngValue]="true">Active</option>
+                    <option [ngValue]="false">Inactive</option>
+                </select>
 
 
             </div>

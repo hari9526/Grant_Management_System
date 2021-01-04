@@ -9,30 +9,45 @@ import { AccountService } from '../_services/account.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css'], 
+  styleUrls: ['./nav.component.css'],
   animations: [
     trigger('textAnim', [
       //Entry Animation
       transition('void=>*', [
         useAnimation(smallToNormal)
       ])
-    ]), 
+    ]),
     trigger('itemAnim', [
       //Entry Animation
       transition('void=>*', [
         useAnimation(dropDownDeep)
       ])
-    ])   
+    ])
   ]
 })
 export class NavComponent implements OnInit {
 
-  constructor(public accountService : AccountService , private router : Router) {
+  public IsItAdmin: boolean ;
 
-   }
+  constructor(public accountService: AccountService, private router: Router) {
+
+    this.IsItAdminUser();
+    console.log(this.IsItAdmin)
+  }
 
   ngOnInit(): void {
-     
+ 
+
+
+
+  }
+  IsItAdminUser() {
+    this.accountService.currentUser$.subscribe(type => {
+      if (type.userType == "Admin")
+        this.IsItAdmin = true;
+      else
+        this.IsItAdmin = false;
+    });
   }
   logout() {
 

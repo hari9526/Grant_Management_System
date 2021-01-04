@@ -7,20 +7,18 @@ import { AccountService } from '../_services/account.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class ApplicantGuard implements CanActivate {
   constructor(private accountServices : AccountService, private router : Router){
 
   }
-
-  canActivate(): Observable<boolean>{
+  canActivate() : Observable<boolean> {
     return this.accountServices.currentUser$.pipe(
       map(user => {
         if(user) {
-          if(user.userType == "Admin")
+          if(user.userType == "Applicant")
             return true; 
-          else if(user.userType == "Applicant"){
-            this.router.navigate(['/applicant']); 
+          else if(user.userType == "Admin"){
+            this.router.navigate(['/grant-program']); 
             return false; 
           }
         }

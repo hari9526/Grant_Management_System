@@ -19,11 +19,17 @@ namespace API.Controllers
         {
             _grants = grants;
         }
-
+        
         public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
         {
             //return await _context.GrantProgram.ToListAsync();
             return new ActionResult<IEnumerable<GrantProgram>>(await _grants.GetGrants());
+        }
+        [HttpGet("active")]
+        public async Task<ActionResult<IEnumerable<GrantProgram>>> GetActiveGrants()
+        {
+            //return await _context.GrantProgram.ToListAsync();
+            return new ActionResult<IEnumerable<GrantProgram>>(await _grants.GetActiveGrants());
         }
 
         [HttpPost]
@@ -57,6 +63,8 @@ namespace API.Controllers
         {
             if (id != program.Id)
                 return BadRequest();
+            if(!(await _grants.ProgramExists(program.Id)))
+                return BadRequest("Program doesn't exist"); 
             await _grants.UpdateGrant(program);
             return NoContent();
         }

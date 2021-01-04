@@ -21,7 +21,7 @@ namespace API.Controllers
             return new ActionResult<IEnumerable<ReviewDto>>(await _review.GetDetails()); 
 
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult<ReviewDto>> UpdateReview(ReviewDto review)
         {
             return await _review.UpdateReview(review); 

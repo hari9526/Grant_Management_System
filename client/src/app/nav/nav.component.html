@@ -4,8 +4,8 @@
   <h5 class="my-3 mr-md-auto font-weight-normal"><b>Grant Management System</b></h5>
   <nav class="my-2 my-md-0 mr-md-3" [@textAnim]>
     <a class="p-2 text-secondary">Hi {{user.firstName | titlecase}}!</a>
-    <a class="p-2 text-secondary" routerLink='/grant-program' routerLinkActive='active'>Grant Program</a>
-    <a class="p-2 text-secondary" routerLink='/review' routerLinkActive='active'>Review</a>
+    <a class="p-2 text-secondary" *ngIf="(user.userType==='Admin')" routerLink='/grant-program' routerLinkActive='active'>Grant Program</a>
+    <a class="p-2 text-secondary" *ngIf="(user.userType==='Admin')" routerLink='/review' routerLinkActive='active'>Review</a>
     <a class="p-2 text-primary" (click)="logout()">Logout</a>
   </nav>
 </div>

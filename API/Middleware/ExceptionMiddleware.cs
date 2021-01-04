@@ -27,7 +27,7 @@ namespace API.Middleware
             try
             {
                 await _next(context);
-            }
+            }       
             catch (Exception ex)
             {
                 _loggger.LogError(ex, ex.Message);

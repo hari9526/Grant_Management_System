@@ -12,7 +12,7 @@ export class EducationService {
   constructor(private http: HttpClient, private acccountService : AccountService) { }
 
   getEducationDetails(userId){
-   console.log(userId)
+ 
     return this.http.get(environment.baseUrl + "education/" + userId);    
   }
 
