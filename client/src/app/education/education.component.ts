@@ -50,7 +50,7 @@ export class EducationComponent implements OnInit {
   onSubmitApplicant() { }
 
   submit(fg: FormGroup) {
-    debugger;
+   
     if (fg.value.id == 0) {
       this.educationService.saveDetail(fg.value, this.userId).subscribe(
         (response: any) => {

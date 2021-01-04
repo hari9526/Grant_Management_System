@@ -14,7 +14,7 @@ export class ReviewService {
   }
 
   UpdateReview(data) {
-    debugger; 
+   
     return this.http.put(environment.baseUrl + "review", data);
 
   }

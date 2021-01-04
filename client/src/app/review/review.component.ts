@@ -51,7 +51,7 @@ export class ReviewComponent implements OnInit {
   }
   GetApplicants() {
     this.reviewService.getReviewDetails().subscribe(response => {
-      debugger
+     
       if (Object.keys(response).length === 0) 
         this.emptyList = true;
       else {
@@ -72,10 +72,10 @@ export class ReviewComponent implements OnInit {
     
   }
   UpdateReview(formData: FormGroup){
-    debugger
+   
     this.reviewService.UpdateReview(formData.value).subscribe(response =>{     
       (response : any) =>{      
-        debugger  
+         
         this.toaster.success("Updated!")
       }
     });       

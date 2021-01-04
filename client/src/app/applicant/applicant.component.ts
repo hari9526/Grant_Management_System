@@ -100,7 +100,7 @@ export class ApplicantComponent implements OnInit {
   }
 
   getApplicantDetails() {
-    debugger
+    
     this.applicantService.getApplicantDetails(this.userId).subscribe(
       (response: ApplicantDetail) => {
         if (response == null)
@@ -124,7 +124,7 @@ export class ApplicantComponent implements OnInit {
               Phone: [response.phone, [Validators.required]]
             });
           console.log(this.formData);
-          debugger
+          
         }
 
       }
