@@ -25,7 +25,6 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserInfo>> GetUser(int id)
-
         {
             return await _user.GetUserbyId(id);
         }

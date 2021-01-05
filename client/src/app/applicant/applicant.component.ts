@@ -1,11 +1,11 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
+import { query, stagger, style, transition, trigger, useAnimation } from '@angular/animations';
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { bigToNormal, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
+import { bigToNormal, dropDown, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
 import { ApplicantDetail } from '../_model/applicantDetail';
 import { GrantProgram } from '../_model/grantprogram';
 import { UserGrantMapping } from '../_model/userGrantMapping';
@@ -29,6 +29,19 @@ import { GrantProgramService } from '../_services/grant-program.service';
       //Entry Animation
       transition('void=>*', [
         useAnimation(dropDownDeepAndUp)
+      ])
+    ]), 
+    trigger('listAnim', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+
+        query(':enter', stagger('80ms', [
+          useAnimation(dropDown)]), { optional: true }),
+
+        // query(':leave', stagger('50ms', [
+        //   useAnimation(dropUpAnimation)]), { optional: true })
+
       ])
     ])
 

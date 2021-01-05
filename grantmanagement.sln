@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "business", "business\busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "models", "models\models.csproj", "{40171E23-572E-42E9-9B34-C49D05E11275}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unittest", "unittest\unittest.csproj", "{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{40171E23-572E-42E9-9B34-C49D05E11275}.Release|x64.Build.0 = Release|Any CPU
 		{40171E23-572E-42E9-9B34-C49D05E11275}.Release|x86.ActiveCfg = Release|Any CPU
 		{40171E23-572E-42E9-9B34-C49D05E11275}.Release|x86.Build.0 = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|x64.Build.0 = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Debug|x86.Build.0 = Debug|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|x64.ActiveCfg = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|x64.Build.0 = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{3B03BB05-BB64-4CEF-ACB2-D07E336CBB5E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

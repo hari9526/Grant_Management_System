@@ -7,6 +7,13 @@ export let dropDown = animation([
         style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
     ])) 
 ]);
+export let fromButtom = animation([
+    animate('250ms ease-in', keyframes([
+        style({ opacity: 0, transform: 'translateY(60px)', offset: 0 }),
+        style({ opacity: .5, transform: 'translateY(-5px)', offset: 0.3 }),
+        style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
+    ])) 
+]);
 export let dropDownSmall = animation([
     animate('250ms ease-in', keyframes([
         style({ opacity: 0, transform: 'translateY(0)', offset: 0 }),

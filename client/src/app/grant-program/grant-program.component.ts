@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { bigToNormalSmallAnimation, dropDown, dropDownDeepAndUp, dropUpAnimation, smallToNormal } from '../animation';
+import { bigToNormalSmallAnimation, dropDown, dropDownDeepAndUp, dropUpAnimation, fromButtom, smallToNormal } from '../animation';
 import { GrantProgram } from '../_model/grantprogram';
 import { GrantProgramService } from '../_services/grant-program.service';
 
