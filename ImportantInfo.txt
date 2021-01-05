@@ -15,6 +15,10 @@ dotnet new sln : This will create a solution. Name of the solution is the folder
 dotnet new webapi -o API : Creates an webapi project in a folder named API
 dotnet sln add API : Adds the project named API to our solution. 
 
+dotnet run : For running 
+dotnet watch run : For auto building
+dotnet test : For unit testing 
+
 
 NugetPackages Required: 
 
