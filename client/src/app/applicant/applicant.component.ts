@@ -106,9 +106,9 @@ export class ApplicantComponent implements OnInit {
       PhysicallyDisabled: ['', [Validators.required]],
       Address: ['', [Validators.required]],
       City: ['', [Validators.required]],
-      PostalCode: ['', [Validators.required]],
-      Mobile: ['', [Validators.required]],
-      Phone: ['', [Validators.required]]
+      PostalCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      Mobile: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
+      Phone: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
     });
   }
 
@@ -132,9 +132,9 @@ export class ApplicantComponent implements OnInit {
               PhysicallyDisabled: [response.disabled, [Validators.required]],
               Address: [response.address, [Validators.required]],
               City: [response.city, [Validators.required]],
-              PostalCode: [response.postalCode, [Validators.required]],
-              Mobile: [response.mobile, [Validators.required]],
-              Phone: [response.phone, [Validators.required]]
+              PostalCode: [response.postalCode, [Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+              Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
+              Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
           console.log(this.formData);
           

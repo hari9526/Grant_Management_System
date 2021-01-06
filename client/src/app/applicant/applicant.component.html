@@ -144,6 +144,19 @@
                                         *ngIf="formData.get('PostalCode').touched && formData.get('PostalCode').errors?.required">This
                                         field
                                         is mandatory.</label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('PostalCode').touched && formData.get('PostalCode').errors?.minlength">
+                                        Enter a 6 digit number.
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('PostalCode').touched && formData.get('PostalCode').errors?.maxlength">
+                                        Enter a 6 digit number.
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('PostalCode').touched && formData.get('PostalCode').errors?.pattern">
+                                        Enter numeric values only
+                                    </label>
+
                                 </div>
                                 <div class="form-group required mb-0">
                                     <label>Phone</label>
@@ -152,6 +165,18 @@
                                         *ngIf="formData.get('Phone').touched && formData.get('Phone').errors?.required">This
                                         field
                                         is mandatory.</label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Phone').touched && formData.get('Phone').errors?.pattern">
+                                        Enter numeric values only
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Phone').touched && formData.get('Phone').errors?.minlength">
+                                        Minimum 10 digits requried
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Phone').touched && formData.get('Phone').errors?.maxlength">
+                                        Maximum 12 digits allowed
+                                    </label>
                                 </div>
 
                             </div>
@@ -171,6 +196,18 @@
                                         *ngIf="formData.get('Mobile').touched && formData.get('Mobile').errors?.required">This
                                         field
                                         is mandatory.</label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Mobile').touched && formData.get('Mobile').errors?.pattern">
+                                        Enter numeric values only
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Mobile').touched && formData.get('Mobile').errors?.minlength">
+                                        Minimum 10 digits requried
+                                    </label>
+                                    <label class="text-danger"
+                                        *ngIf="formData.get('Mobile').touched && formData.get('Mobile').errors?.maxlength">
+                                        Maximum 12 digits allowed
+                                    </label>
                                 </div>
 
                             </div>
