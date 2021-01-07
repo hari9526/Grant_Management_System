@@ -49,6 +49,7 @@ export class GrantProgramComponent implements OnInit {
               private grantservice: GrantProgramService, 
               private toaster: ToastrService) {
     this.GetGrants(); 
+    console.log(this.grantProgramForms)
  
 
   }

@@ -1,6 +1,3 @@
-
-
-
 <div class="container" *ngIf="emptyList" [@noItemAnim]>
     <div class="image">
 
@@ -24,9 +21,7 @@
     </div>
 
     <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
-        <form class="tr" [formGroup]="fg" 
-            *ngFor="let fg of grantProgramForms.controls; let i = index"
-            >
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of grantProgramForms.controls; let i = index">
             <div class="td">
                 <input class="form-control" formControlName="ProgramName">
             </div>
@@ -46,13 +41,17 @@
 
 
                 <input type="text" placeholder="Select date" class="form-control" formControlName="EndDate" bsDatepicker
-                    [bsConfig]="{ isAnimated: true,  adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD'}">
-
-
+                    [bsConfig]="{ isAnimated: true,  
+                                  adaptivePosition: true, 
+                                  dateInputFormat: 'YYYY-MM-DD'
+                                   
+                                }" 
+                    
+                    >
             </div>
             <div class="td">
-               
-                <select  class="form-control" formControlName="Status">
+
+                <select class="form-control" formControlName="Status">
                     <option [ngValue]="true">Active</option>
                     <option [ngValue]="false">Inactive</option>
                 </select>
@@ -60,11 +59,12 @@
 
             </div>
             <div class="td">
-                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fg.invalid" (click)="recordSubmit(fg)">
+                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fg.invalid"
+                    (click)="recordSubmit(fg)">
                     <i class="far" [ngClass]="(fg.get('Id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
 
                 </button>
-                <button class="btn text-danger" tooltip="Delete" (click)="delete(fg.get('Id').value, i)"  >
+                <button class="btn text-danger" tooltip="Delete" (click)="delete(fg.get('Id').value, i)">
                     <i class="far fa-trash-alt"></i>
                 </button>
             </div>
