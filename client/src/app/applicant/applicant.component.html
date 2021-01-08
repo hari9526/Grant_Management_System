@@ -42,7 +42,8 @@
                                         
 
                                         <select class="form-control" formControlName="Country">
-                                            <option *ngFor="let country of countryList" value="{{country.id}}">
+                                            <option value="0">--Select--</option>
+                                            <option *ngFor="let country of countryList" [value]="country.id" (ngModelChange)="getStateList()">
                                                 {{country.name}}
                                             </option>
 
@@ -100,7 +101,12 @@
 
                                     <div class="form-group  required">
                                         <label>State</label>
-                                        <input class="form-control" formControlName="State">
+                                        <select class="form-control" formControlName="State">
+                                            <option value="0">--Select--</option>
+                                            <option *ngFor="let state of stateList" [value]="state.id">
+                                                {{state.name}}
+                                            </option>
+                                        </select>
                                         <label class="text-danger"
                                             *ngIf="formData.get('State').touched && formData.get('State').errors?.required">This
                                             field is mandatory.</label>
@@ -109,6 +115,7 @@
                                     <label>Grant program</label>
 
                                     <select class="form-control" formControlName="GrantProgram">
+                                        <option value="0">--Select--</option>
                                         <option *ngFor="let item of grantArrayList" value="{{item.id}}">
                                             {{item.programName}}
                                         </option>

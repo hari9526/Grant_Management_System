@@ -59,7 +59,7 @@ export class ApplicantComponent implements OnInit {
   applicantDetails: ApplicantDetail;
   grantApplied: UserGrantMapping;
   grantArrayList: GrantProgram[] = [];
-  stateList : State []; 
+  stateList : State [] = []; 
   countryList : Country [] = []; 
   
   constructor(private fb: FormBuilder,
@@ -72,6 +72,7 @@ export class ApplicantComponent implements OnInit {
     this.getApplicantDetails();
     this.getGrantList();
     this.getCountryList(); 
+    this.getStateList(); 
     
 
   }
@@ -79,11 +80,21 @@ export class ApplicantComponent implements OnInit {
     this.applicantService.getCountryList().subscribe( response=>{
       (response as []).map((country : Country) =>
         this.countryList.push(country))
-    })
-    
+    })    
+  }
+
+  getStateList(){
+    debugger
+    this.applicantService.getStateList(101).subscribe(response =>{
+      (response as []).map((state : State) =>
+        this.stateList.push(state))
+    }); 
+    console.log(this.stateList)  
   }
 
   
+
+
 
   ngOnInit(): void {
 
@@ -149,6 +160,7 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
+            debugger
         
           
         }
