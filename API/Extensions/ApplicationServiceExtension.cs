@@ -24,6 +24,7 @@ namespace API.Extensions
             services.AddTransient<IReview, Review>();
             services.AddTransient<IEducation, Education>();
             services.AddTransient<IApplicant, Applicant>();
+            services.AddTransient<ICountry, Country>();
             
             //Data access layer
             services.AddTransient<IUserRepository, UserRepository>();            
@@ -31,6 +32,7 @@ namespace API.Extensions
             services.AddTransient<IReviewRepository, ReviewRepository>();
             services.AddTransient<IEducationDetailsRepository, EducationDetailsRepository>();
             services.AddTransient<IApplicantRepository, AppicantRepository>();
+            services.AddTransient<ICountryRepository, CountryRepository>();
 
             
             services.AddDbContext<DataContext>(options =>

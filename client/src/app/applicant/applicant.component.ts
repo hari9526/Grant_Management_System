@@ -4,10 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { bigToNormal, dropDown, dropDownDeepAndUp, dropDownSmall, smallToNormal } from '../animation';
 import { ApplicantDetail } from '../_model/applicantDetail';
+import { Country } from '../_model/country';
 import { GrantProgram } from '../_model/grantprogram';
+import { State } from '../_model/state';
 import { UserGrantMapping } from '../_model/userGrantMapping';
 import { AccountService } from '../_services/account.service';
 import { ApplicantdetailsService } from '../_services/applicantdetails.service';
@@ -56,10 +59,9 @@ export class ApplicantComponent implements OnInit {
   applicantDetails: ApplicantDetail;
   grantApplied: UserGrantMapping;
   grantArrayList: GrantProgram[] = [];
-
-
-
-
+  stateList : State []; 
+  countryList : Country [] = []; 
+  
   constructor(private fb: FormBuilder,
     private router: Router,
     private applicantService: ApplicantdetailsService,
@@ -69,8 +71,19 @@ export class ApplicantComponent implements OnInit {
     this.currentUserId();
     this.getApplicantDetails();
     this.getGrantList();
+    this.getCountryList(); 
+    
 
   }
+  getCountryList() {
+    this.applicantService.getCountryList().subscribe( response=>{
+      (response as []).map((country : Country) =>
+        this.countryList.push(country))
+    })
+    
+  }
+
+  
 
   ngOnInit(): void {
 
@@ -136,7 +149,7 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
-          console.log(this.formData);
+        
           
         }
 
@@ -165,7 +178,7 @@ export class ApplicantComponent implements OnInit {
       phone: this.formData.value.Phone
 
     }
-    console.log(this.formData.value.GrantProgram)
+ 
     this.applicantService.saveApplicantDetails(this.applicantDetails, this.userId)
       .subscribe(
         (response: any) => {
@@ -185,7 +198,7 @@ export class ApplicantComponent implements OnInit {
       userId: this.userId,
       grantId: parseInt(this.formData.value.GrantProgram)
     }
-    console.log("HI" + this.grantApplied.grantId)
+  
     this.applicantService.saveGrantDetails(this.grantApplied).subscribe(
 
       (response: any) => {

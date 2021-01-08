@@ -39,9 +39,16 @@
 
                                     <div class="form-group  required">
                                         <label>Country</label>
-                                        <input class="form-control" formControlName="Country">
+                                        
+
+                                        <select class="form-control" formControlName="Country">
+                                            <option *ngFor="let country of countryList" value="{{country.id}}">
+                                                {{country.name}}
+                                            </option>
+
+                                        </select>
                                         <label class="text-danger"
-                                            *ngIf="formData.get('FirstName').touched && formData.get('FirstName').errors?.required">This
+                                            *ngIf="formData.get('Country').touched && formData.get('Country').errors?.required">This
                                             field is mandatory.</label>
                                     </div>
 
@@ -85,6 +92,9 @@
                                         <input type="text" placeholder="Select date" class="form-control"
                                             formControlName="DateOfBirth" bsDatepicker
                                             [bsConfig]="{ isAnimated: true,  adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD'}">
+                                            <label class="text-danger"
+                                            *ngIf="formData.get('DateOfBirth').touched && formData.get('DateOfBirth').errors?.required">This
+                                            field is mandatory.</label>
 
                                     </div>
 
@@ -92,7 +102,7 @@
                                         <label>State</label>
                                         <input class="form-control" formControlName="State">
                                         <label class="text-danger"
-                                            *ngIf="formData.get('FirstName').touched && formData.get('FirstName').errors?.required">This
+                                            *ngIf="formData.get('State').touched && formData.get('State').errors?.required">This
                                             field is mandatory.</label>
                                     </div>
 
