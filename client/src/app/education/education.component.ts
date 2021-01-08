@@ -71,18 +71,26 @@ export class EducationComponent implements OnInit {
 
   }
   delete(Id, i) {
-    if (Id == 0)
+    if (Id == 0){
       this.formModelEducation.removeAt(i);
+      if(this.formModelEducation.length == 0)
+            this.InitializeEducationalDetails();
+
+    }
+      
     else if (confirm("Do you want to delete?")) {
 
       this.educationService.delete(Id).subscribe(
         (response: any) => {
           this.formModelEducation.removeAt(i);
           this.toastr.success("Deleted!");
+          if(this.formModelEducation.length == 0)
+            this.InitializeEducationalDetails();
+           
         }
       );
     }
-
+    
   }
   InitializeEducationalDetails() {
     this.formModelEducation.push(this.fb.group({

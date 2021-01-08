@@ -22,6 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ReviewComponent } from './review/review.component';
 import { ApplicantComponent } from './applicant/applicant.component';
 import { EducationComponent } from './education/education.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 
@@ -39,7 +40,8 @@ import { EducationComponent } from './education/education.component';
     GrantProgramComponent,
     ReviewComponent,
     ApplicantComponent,
-    EducationComponent
+    EducationComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

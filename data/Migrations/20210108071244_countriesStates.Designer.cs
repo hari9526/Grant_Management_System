@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using data.Data;
 
 namespace data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210108071244_countriesStates")]
+    partial class countriesStates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,27 +65,6 @@ namespace data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ApplicantDetails");
-                });
-
-            modelBuilder.Entity("models.DbModels.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("models.DbModels.EducationDetail", b =>
@@ -140,26 +121,6 @@ namespace data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GrantProgram");
-                });
-
-            modelBuilder.Entity("models.DbModels.State", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Country_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Country_Id");
-
-                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("models.DbModels.UserGrantMapping", b =>
@@ -247,15 +208,6 @@ namespace data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("models.DbModels.State", b =>
-                {
-                    b.HasOne("models.DbModels.Country", null)
-                        .WithMany("States")
-                        .HasForeignKey("Country_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("models.DbModels.UserGrantMapping", b =>
                 {
                     b.HasOne("models.DbModels.GrantProgram", null)
@@ -269,11 +221,6 @@ namespace data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("models.DbModels.Country", b =>
-                {
-                    b.Navigation("States");
                 });
 
             modelBuilder.Entity("models.DbModels.GrantProgram", b =>

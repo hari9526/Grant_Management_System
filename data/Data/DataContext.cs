@@ -36,5 +36,8 @@ namespace data.Data
         public DbSet<ApplicantDetail> ApplicantDetails {get;set;}
         public DbSet<EducationDetail> EducationDetails {get;set;}
         public DbSet<UserGrantMapping> UserGrantMappings {get;set;}        
+        public DbSet<Country> Countries{get;set;} 
+        public DbSet<State> States {get;set;}
+
     }
 }
