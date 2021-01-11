@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace data.Migrations
 {
-    public partial class initialcreation : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(40)", nullable: true),
+                    PhoneCode = table.Column<string>(type: "nvarchar(10)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "GrantProgram",
                 columns: table => new
@@ -17,7 +31,7 @@ namespace data.Migrations
                     ProgramCode = table.Column<string>(type: "nvarchar(10)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
+                    Status = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,30 +60,21 @@ namespace data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicantDetails",
+                name: "States",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "Date", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    Disabled = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(60)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(20)", nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(30)", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(40)", nullable: true),
+                    Country_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicantDetails", x => x.Id);
+                    table.PrimaryKey("PK_States", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApplicantDetails_UserInfo_Id",
-                        column: x => x.Id,
-                        principalTable: "UserInfo",
+                        name: "FK_States_Countries_Country_Id",
+                        column: x => x.Country_Id,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -125,10 +130,54 @@ namespace data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ApplicantDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "Date", nullable: true),
+                    StateId = table.Column<int>(type: "int", nullable: false),
+                    Disabled = table.Column<bool>(type: "bit", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(60)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(30)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicantDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApplicantDetails_States_StateId",
+                        column: x => x.StateId,
+                        principalTable: "States",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ApplicantDetails_UserInfo_Id",
+                        column: x => x.Id,
+                        principalTable: "UserInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicantDetails_StateId",
+                table: "ApplicantDetails",
+                column: "StateId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_EducationDetails_ApplicantId",
                 table: "EducationDetails",
                 column: "ApplicantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_States_Country_Id",
+                table: "States",
+                column: "Country_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserGrantMappings_GrantId",
@@ -153,10 +202,16 @@ namespace data.Migrations
                 name: "UserGrantMappings");
 
             migrationBuilder.DropTable(
+                name: "States");
+
+            migrationBuilder.DropTable(
                 name: "GrantProgram");
 
             migrationBuilder.DropTable(
                 name: "UserInfo");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
         }
     }
 }

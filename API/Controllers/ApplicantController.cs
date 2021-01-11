@@ -15,15 +15,15 @@ namespace API.Controllers
 
         }
         [HttpGet("{userId}")]
-        public async Task<ActionResult<ApplicantDetail>> GetDetails(int userId)
-        {
-            return await _applicant.Get(userId);
-
+        public async Task<ActionResult<ApplicantDto>> GetDetails(int userId)
+        {            
+            var result =  await _applicant.Get(userId);                         
+            return result; 
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<ApplicantDetail>> SaveDetails(ApplicantDetail detail)
+        public async Task<ActionResult<ApplicantDetail>> SaveDetails(ApplicantDto detail)
         {
             var result = await _applicant.Save(detail);
             return CreatedAtAction("GetDetails", new { userId = result.Id }, result);
@@ -31,7 +31,7 @@ namespace API.Controllers
 
 
         [HttpPut("{applicantId}")]
-        public async Task<ActionResult<ApplicantDetail>> UpdateDetails(int applicantId, ApplicantDetail detail)
+        public async Task<ActionResult<ApplicantDetail>> UpdateDetails(int applicantId, ApplicantDto detail)
         {
             if (applicantId != detail.Id)
                 return BadRequest();

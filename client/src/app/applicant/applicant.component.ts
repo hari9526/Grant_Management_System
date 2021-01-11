@@ -72,7 +72,7 @@ export class ApplicantComponent implements OnInit {
     this.getApplicantDetails();
     this.getGrantList();
     this.getCountryList(); 
-    this.getStateList(); 
+     
     
 
   }
@@ -83,13 +83,16 @@ export class ApplicantComponent implements OnInit {
     })    
   }
 
-  getStateList(){
-    debugger
-    this.applicantService.getStateList(101).subscribe(response =>{
+  getStateList(event){
+    this.stateList = []; 
+    
+    this.applicantService.getStateList(event).subscribe(response =>{
       (response as []).map((state : State) =>
         this.stateList.push(state))
     }); 
-    console.log(this.stateList)  
+    debugger
+    
+   
   }
 
   
@@ -150,8 +153,8 @@ export class ApplicantComponent implements OnInit {
               FirstName: [response.firstName, [Validators.required]],
               LastName: [response.lastName, [Validators.required]],
               Email: [response.email, [Validators.required, Validators.email]],
-              DateOfBirth: [response.dateOfBirth, [Validators.required]],
-              Country: [response.country, [Validators.required]],
+              DateOfBirth: [response.dateOfBirth, [Validators.required]], 
+              Country : [response.country, [Validators.required]],      
               State: [response.state, [Validators.required]],
               PhysicallyDisabled: [response.disabled, [Validators.required]],
               Address: [response.address, [Validators.required]],
@@ -160,7 +163,10 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
-            debugger
+            console.log(this.formData)
+            if(response.state)
+               this.getStateList(response.country)
+            
         
           
         }
@@ -180,7 +186,7 @@ export class ApplicantComponent implements OnInit {
       lastName: this.formData.value.LastName,
       email: this.formData.value.Email,
       dateOfBirth: this.formData.value.DateOfBirth,
-      country: this.formData.value.Country,
+      country : this.formData.value.Country,
       state: this.formData.value.State,
       disabled: this.formData.value.PhysicallyDisabled,
       address: this.formData.value.Address,

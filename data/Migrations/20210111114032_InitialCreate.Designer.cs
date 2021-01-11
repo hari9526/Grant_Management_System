@@ -10,8 +10,8 @@ using data.Data;
 namespace data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210104042555_booleanNullable")]
-    partial class booleanNullable
+    [Migration("20210111114032_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,6 @@ namespace data.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime?>("DateOfBirth")
@@ -59,12 +56,33 @@ namespace data.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int>("StateId")
+                        .HasColumnType("int")
+                        .HasColumnName("StateId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StateId");
+
                     b.ToTable("ApplicantDetails");
+                });
+
+            modelBuilder.Entity("models.DbModels.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("PhoneCode")
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("models.DbModels.EducationDetail", b =>
@@ -121,6 +139,26 @@ namespace data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GrantProgram");
+                });
+
+            modelBuilder.Entity("models.DbModels.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Country_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Country_Id");
+
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("models.DbModels.UserGrantMapping", b =>
@@ -192,11 +230,21 @@ namespace data.Migrations
 
             modelBuilder.Entity("models.DbModels.ApplicantDetail", b =>
                 {
-                    b.HasOne("models.DbModels.UserInfo", null)
-                        .WithMany("ApplicantDetails")
-                        .HasForeignKey("Id")
+                    b.HasOne("models.DbModels.UserInfo", "UserInfo")
+                        .WithOne("ApplicantDetails")
+                        .HasForeignKey("models.DbModels.ApplicantDetail", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("models.DbModels.State", "States")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("States");
+
+                    b.Navigation("UserInfo");
                 });
 
             modelBuilder.Entity("models.DbModels.EducationDetail", b =>
@@ -204,6 +252,15 @@ namespace data.Migrations
                     b.HasOne("models.DbModels.UserInfo", null)
                         .WithMany("EducationDetails")
                         .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("models.DbModels.State", b =>
+                {
+                    b.HasOne("models.DbModels.Country", null)
+                        .WithMany("States")
+                        .HasForeignKey("Country_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -221,6 +278,11 @@ namespace data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("models.DbModels.Country", b =>
+                {
+                    b.Navigation("States");
                 });
 
             modelBuilder.Entity("models.DbModels.GrantProgram", b =>

@@ -23,6 +23,7 @@ namespace API.Controllers
         public async Task<IEnumerable<State>> GetStates(int  countryId){
             return await _country.GetStates(countryId); 
         }
+        //GetCountryByStateId(int stateId) for showing in applicant details 
 
     }
 }

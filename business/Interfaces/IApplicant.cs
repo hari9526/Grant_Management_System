@@ -6,12 +6,12 @@ namespace business.Interfaces
 {
     public interface IApplicant
     {
-        Task<ApplicantDetail> Get(int userId);
-        Task<ApplicantDetail> Save(ApplicantDetail detail);
-        Task<ApplicantDetail> Update(ApplicantDetail detail);
+        Task<ApplicantDto> Get(int userId);
+        Task<ApplicantDetail> Save(ApplicantDto detail);
+        Task<ApplicantDetail> Update(ApplicantDto detail);
 
         Task<UserGrantMapping> GrantDetails(UserGrantMappingDto mappingDto); 
-        Task<bool> DidApplicantAlreadyApply(UserGrantMappingDto mappingDto); 
-
+        Task<bool> DidApplicantAlreadyApply(UserGrantMappingDto mappingDto);
+        Task<int> GetCountryId(int? stateId);
     }
 }

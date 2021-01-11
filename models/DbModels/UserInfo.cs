@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace models.DbModels
 {
     public class UserInfo
     {
+        [Key]
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string FirstName { get; set; }
@@ -23,7 +25,7 @@ namespace models.DbModels
         public int UpdatedById { get; set; }
         public DateTime? UpdatedDate { get; set; }
         [ForeignKey("Id")]
-        public ICollection<ApplicantDetail> ApplicantDetails{get;set;}
+        public ApplicantDetail ApplicantDetails{get;set;}
         [ForeignKey("UserId")]
         public ICollection<UserGrantMapping> UserGrantMappings{get;set;}
         [ForeignKey("ApplicantId")]

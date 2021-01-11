@@ -41,9 +41,9 @@
                                         <label>Country</label>
                                         
 
-                                        <select class="form-control" formControlName="Country">
+                                        <select class="form-control" (change)="getStateList($event.target.value)" formControlName="Country">
                                             <option value="0">--Select--</option>
-                                            <option *ngFor="let country of countryList" [value]="country.id" (ngModelChange)="getStateList()">
+                                            <option *ngFor="let country of countryList" [value]="country.id" >
                                                 {{country.name}}
                                             </option>
 
@@ -101,11 +101,12 @@
 
                                     <div class="form-group  required">
                                         <label>State</label>
+                                        <!-- <input class="form-control" formControlName="State"> -->
                                         <select class="form-control" formControlName="State">
                                             <option value="0">--Select--</option>
                                             <option *ngFor="let state of stateList" [value]="state.id">
                                                 {{state.name}}
-                                            </option>
+                                            </option>   
                                         </select>
                                         <label class="text-danger"
                                             *ngIf="formData.get('State').touched && formData.get('State').errors?.required">This
@@ -251,7 +252,7 @@
                         <div class="form-group mb-5 col-md-8 offset-md-2 mt-3">
                             <button type="submit"
                                 tooltip="If you have added education details then the status of your application is &#34;Completed&#34;. If you didn&#39;t add education details, then it would be in &#34;Submitted&#34; status. "
-                                class="btn btn-primary active btn-lg btn-block" [disabled]="!formData.valid"
+                                class="btn btn-primary active btn-lg btn-block" [disabled]="formData.valid"
                                 (click)="saveApplicant()">
                                 <img *ngIf="isLoading" style="width :30px" src="assets/img/Loader.gif">
                                 {{buttonTextApplicant}}

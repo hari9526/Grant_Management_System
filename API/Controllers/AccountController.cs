@@ -45,7 +45,7 @@ namespace API.Controllers
             };
             //Save userinfo to applicant table if the usertype is an applicant. 
             if(userDto.UserType == "Applicant"){
-                var applicantDetails = new ApplicantDetail{
+                var applicantDetails = new ApplicantDto{
                     Id = userDto.Id, 
                     FirstName = userDto.FirstName, 
                     LastName = userDto.LastName, 

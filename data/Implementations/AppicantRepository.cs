@@ -27,8 +27,16 @@ namespace data.Implementations
 
         }
 
-        public async Task<ApplicantDetail> Save(ApplicantDetail detail)
+        public async Task<int> GetCountryId(int? stateId)
         {
+            //converting int? to int
+            int id = stateId ?? default(int); 
+            var result = await _context.States.FirstOrDefaultAsync(x=>x.Id == id); 
+            return result.Country_Id; 
+        }
+
+        public async Task<ApplicantDetail> Save(ApplicantDetail detail)
+        {       
             await _context.ApplicantDetails.AddAsync(detail); 
             await _context.SaveChangesAsync(); 
             return detail; 

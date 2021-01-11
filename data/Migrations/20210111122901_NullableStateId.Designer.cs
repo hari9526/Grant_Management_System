@@ -10,8 +10,8 @@ using data.Data;
 namespace data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210108094331_CountryTableCorrection")]
-    partial class CountryTableCorrection
+    [Migration("20210111122901_NullableStateId")]
+    partial class NullableStateId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,6 @@ namespace data.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime?>("DateOfBirth")
@@ -59,10 +56,13 @@ namespace data.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int?>("StateId")
+                        .HasColumnType("int")
+                        .HasColumnName("StateId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StateId");
 
                     b.ToTable("ApplicantDetails");
                 });
@@ -75,10 +75,10 @@ namespace data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("PhoneCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -152,7 +152,7 @@ namespace data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -230,11 +230,19 @@ namespace data.Migrations
 
             modelBuilder.Entity("models.DbModels.ApplicantDetail", b =>
                 {
-                    b.HasOne("models.DbModels.UserInfo", null)
-                        .WithMany("ApplicantDetails")
-                        .HasForeignKey("Id")
+                    b.HasOne("models.DbModels.UserInfo", "UserInfo")
+                        .WithOne("ApplicantDetails")
+                        .HasForeignKey("models.DbModels.ApplicantDetail", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("models.DbModels.State", "States")
+                        .WithMany()
+                        .HasForeignKey("StateId");
+
+                    b.Navigation("States");
+
+                    b.Navigation("UserInfo");
                 });
 
             modelBuilder.Entity("models.DbModels.EducationDetail", b =>

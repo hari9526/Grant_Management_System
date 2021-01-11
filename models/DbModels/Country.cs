@@ -7,9 +7,12 @@ namespace models.DbModels
     {
  
         public int Id { get; set; }
+        [Column(TypeName = "nvarchar(40)")]
         public string Name { get; set; }
+        [Column(TypeName = "nvarchar(10)")]
         public string PhoneCode { get; set; }
         [ForeignKey("Country_Id")]
-        public ICollection<State> States{get;set;} 
+        public ICollection<State> States{get;set;}
+          
     }
-}
+}   
