@@ -100,7 +100,7 @@ namespace business.Implementations
                 Id = detail.Id, 
                 FirstName = detail.FirstName, 
                 LastName = detail.LastName, 
-                Email = detail.LastName, 
+                Email = detail.Email, 
                 DateOfBirth = detail.DateOfBirth, 
                 StateId = detail.State, 
                 Disabled = detail.Disabled, 
