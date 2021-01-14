@@ -1,6 +1,7 @@
 import { query, stagger, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { bigToNormalSmallAnimation, dropDown, dropDownDeepAndUp, dropUpAnimation, fromButtom, smallToNormal } from '../animation';
@@ -49,7 +50,7 @@ export class GrantProgramComponent implements OnInit {
               private grantservice: GrantProgramService, 
               private toaster: ToastrService) {
     this.GetGrants(); 
-    console.log(this.grantProgramForms)
+    
  
 
   }
@@ -72,7 +73,7 @@ export class GrantProgramComponent implements OnInit {
               Id: [grantProgram.id],
               ProgramName: [grantProgram.programName, Validators.required],
               ProgramCode: [grantProgram.programCode, Validators.required],
-              StartDate: [grantProgram.startDate, Validators.required],
+              StartDate: [moment(grantProgram.startDate, ["YYYY-MM-DD"]).toDate(), Validators.required],
               EndDate: [grantProgram.endDate, Validators.required],
               Status: [grantProgram.status]
             }

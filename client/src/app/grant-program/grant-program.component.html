@@ -30,24 +30,16 @@
             </div>
 
             <div class="td">
+              
+                <app-calendar formControlName="StartDate" placeholder="Select dateeeeee">
 
-                <input type="text" placeholder="Select date" class="form-control" formControlName="StartDate"
-                    bsDatepicker
-                    [bsConfig]="{ isAnimated: true,  adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD'}">
+                </app-calendar>
 
 
             </div>
             <div class="td">
-
-
-                <input type="text" placeholder="Select date" class="form-control" formControlName="EndDate" bsDatepicker
-                    [bsConfig]="{ isAnimated: true,  
-                                  adaptivePosition: true, 
-                                  dateInputFormat: 'YYYY-MM-DD'
-                                   
-                                }" 
-                    
-                    >
+                <app-calendar formControlName="EndDate" [minDate]="fg.get('StartDate').value" placeholder="Select date">
+                </app-calendar>
             </div>
             <div class="td">
 

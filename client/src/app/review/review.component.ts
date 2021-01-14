@@ -75,7 +75,7 @@ export class ReviewComponent implements OnInit {
    
     this.reviewService.UpdateReview(formData.value).subscribe(response =>{     
       (response : any) =>{      
-         
+      
         this.toaster.success("Updated!")
       }
     });       

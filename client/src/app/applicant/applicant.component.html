@@ -90,9 +90,11 @@
 
                                     <div class="form-group  required">
                                         <label>Date of birth</label>
-                                        <input type="text" placeholder="Select date" class="form-control"
-                                            formControlName="DateOfBirth" bsDatepicker
-                                            [bsConfig]="{ isAnimated: true,  adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD'}">
+                                        
+                                            <app-calendar placeholder="Select date" formControlName="DateOfBirth">
+
+                                            </app-calendar>
+
                                             <label class="text-danger"
                                             *ngIf="formData.get('DateOfBirth').touched && formData.get('DateOfBirth').errors?.required">This
                                             field is mandatory.</label>

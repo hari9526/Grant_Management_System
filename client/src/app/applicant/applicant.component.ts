@@ -90,7 +90,7 @@ export class ApplicantComponent implements OnInit {
       (response as []).map((state : State) =>
         this.stateList.push(state))
     }); 
-    debugger
+  
     
    
   }
@@ -163,7 +163,7 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
-            console.log(this.formData)
+           
             if(response.state)
                this.getStateList(response.country)
             

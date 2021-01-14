@@ -21,10 +21,11 @@ namespace API.Controllers
             return new ActionResult<IEnumerable<ReviewDto>>(await _review.GetDetails()); 
 
         }
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult<ReviewDto>> UpdateReview(ReviewDto review)
         {
-            return await _review.UpdateReview(review); 
+            var result =  await _review.UpdateReview(review); 
+            return result; 
         }
 
         //View all Applicants 

@@ -17,7 +17,7 @@ export class ApplicantdetailsService {
   }
 
   saveApplicantDetails(formData, id){
-    debugger
+   
     return this.http.put(environment.baseUrl + "applicant/" + id, formData); 
   }
 

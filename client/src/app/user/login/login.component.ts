@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
   
         this.isLoading = false,
         this.loginButtonText = "Try again?", 
-        console.log(err)
+      
       }
     );
 

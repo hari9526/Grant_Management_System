@@ -14,8 +14,8 @@ export class ReviewService {
   }
 
   UpdateReview(data) {
-   
-    return this.http.put(environment.baseUrl + "review", data);
+ 
+    return this.http.post(environment.baseUrl + "review", data);
 
   }
 }

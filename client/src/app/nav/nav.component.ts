@@ -32,7 +32,7 @@ export class NavComponent implements OnInit {
   constructor(public accountService: AccountService, private router: Router) {
 
     this.IsItAdminUser();
-    console.log(this.IsItAdmin)
+   
   }
 
   ngOnInit(): void {

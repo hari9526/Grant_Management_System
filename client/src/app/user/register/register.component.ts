@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
   
         this.isLoading = false,
         this.signUpButtonText = "Try again?", 
-        console.log(err)
+    
       }
     )
 
