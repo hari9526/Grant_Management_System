@@ -73,11 +73,10 @@ export class ReviewComponent implements OnInit {
   }
   UpdateReview(formData: FormGroup){
    
-    this.reviewService.UpdateReview(formData.value).subscribe(response =>{     
-      (response : any) =>{      
-      
+    this.reviewService.UpdateReview(formData.value).subscribe(     
+      (response : any) =>{              
         this.toaster.success("Updated!")
       }
-    });       
+    );       
   }
 }

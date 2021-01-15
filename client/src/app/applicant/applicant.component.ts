@@ -126,7 +126,7 @@ export class ApplicantComponent implements OnInit {
       GrantProgram: ['', Validators.required],
       FirstName: ['', [Validators.required]],
       LastName: ['', [Validators.required]],
-      Email: ['', [Validators.required, Validators.email]],
+      Email: [''],
       DateOfBirth: ['', [Validators.required]],
       Country: ['', [Validators.required]],
       State: ['', [Validators.required]],
@@ -149,10 +149,10 @@ export class ApplicantComponent implements OnInit {
             this.formData= 
             this.fb.group({
               Id: [response.id],
-              GrantProgram: [0, Validators.required],
+              GrantProgram: [0],
               FirstName: [response.firstName, [Validators.required]],
               LastName: [response.lastName, [Validators.required]],
-              Email: [response.email, [Validators.required, Validators.email]],
+              Email: [response.email],
               DateOfBirth: [response.dateOfBirth, [Validators.required]], 
               Country : [response.country, [Validators.required]],      
               State: [response.state, [Validators.required]],
@@ -163,6 +163,8 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
+            console.log(this.formData)
+            
            
             if(response.state)
                this.getStateList(response.country)
