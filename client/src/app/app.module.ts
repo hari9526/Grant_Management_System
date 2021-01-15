@@ -25,6 +25,8 @@ import { ReviewComponent } from './review/review.component';
 import { ApplicantComponent } from './applicant/applicant.component';
 import { EducationComponent } from './education/education.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
@@ -43,13 +45,15 @@ import { CalendarComponent } from './calendar/calendar.component';
     ReviewComponent,
     ApplicantComponent,
     EducationComponent,
-    CalendarComponent
+    CalendarComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     HttpClientModule, 
     BrowserAnimationsModule, 
+    NgxSpinnerModule, 
     BsDatepickerModule.forRoot(), 
     BsDropdownModule.forRoot(), 
     TooltipModule.forRoot(),

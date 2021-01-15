@@ -15,6 +15,7 @@ import { UserGrantMapping } from '../_model/userGrantMapping';
 import { AccountService } from '../_services/account.service';
 import { ApplicantdetailsService } from '../_services/applicantdetails.service';
 import { GrantProgramService } from '../_services/grant-program.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -33,7 +34,7 @@ import { GrantProgramService } from '../_services/grant-program.service';
       transition('void=>*', [
         useAnimation(dropDownDeepAndUp)
       ])
-    ]), 
+    ]),
     trigger('listAnim', [
       transition('* => *', [
 
@@ -59,43 +60,44 @@ export class ApplicantComponent implements OnInit {
   applicantDetails: ApplicantDetail;
   grantApplied: UserGrantMapping;
   grantArrayList: GrantProgram[] = [];
-  stateList : State [] = []; 
-  countryList : Country [] = []; 
-  
+  stateList: State[] = [];
+  countryList: Country[] = [];
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private applicantService: ApplicantdetailsService,
     private accountService: AccountService,
     private toastr: ToastrService,
-    private grantservice: GrantProgramService) {
+    private grantservice: GrantProgramService,
+    private spinnerService: NgxSpinnerService) {
     this.currentUserId();
     this.getApplicantDetails();
     this.getGrantList();
-    this.getCountryList(); 
-     
-    
+    this.getCountryList();
+
+
 
   }
   getCountryList() {
-    this.applicantService.getCountryList().subscribe( response=>{
-      (response as []).map((country : Country) =>
+    this.applicantService.getCountryList().subscribe(response => {
+      (response as []).map((country: Country) =>
         this.countryList.push(country))
-    })    
+    })
   }
 
-  getStateList(event){
-    this.stateList = []; 
-    
-    this.applicantService.getStateList(event).subscribe(response =>{
-      (response as []).map((state : State) =>
+  getStateList(event) {
+    this.stateList = [];
+
+    this.applicantService.getStateList(event).subscribe(response => {
+      (response as []).map((state: State) =>
         this.stateList.push(state))
-    }); 
-  
-    
-   
+    });
+
+
+
   }
 
-  
+
 
 
 
@@ -140,21 +142,22 @@ export class ApplicantComponent implements OnInit {
   }
 
   getApplicantDetails() {
-    
+    this.spinnerService.show();
     this.applicantService.getApplicantDetails(this.userId).subscribe(
       (response: ApplicantDetail) => {
         if (response == null)
           this.initializeForm();
         else {
-            this.formData= 
+         
+          this.formData =
             this.fb.group({
               Id: [response.id],
               GrantProgram: [0],
               FirstName: [response.firstName, [Validators.required]],
               LastName: [response.lastName, [Validators.required]],
               Email: [response.email],
-              DateOfBirth: [response.dateOfBirth, [Validators.required]], 
-              Country : [response.country, [Validators.required]],      
+              DateOfBirth: [response.dateOfBirth, [Validators.required]],
+              Country: [response.country, [Validators.required]],
               State: [response.state, [Validators.required]],
               PhysicallyDisabled: [response.disabled, [Validators.required]],
               Address: [response.address, [Validators.required]],
@@ -163,18 +166,20 @@ export class ApplicantComponent implements OnInit {
               Mobile: [response.mobile, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]],
               Phone: [response.phone, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(12)]]
             });
-            console.log(this.formData)
-            
-           
-            if(response.state)
-               this.getStateList(response.country)
-            
-        
+          console.log(this.formData)
+
+
+          if (response.state)
+            this.getStateList(response.country)
           
+
+
+
         }
 
       }
     );
+    this.spinnerService.hide();
 
   }
 
@@ -188,7 +193,7 @@ export class ApplicantComponent implements OnInit {
       lastName: this.formData.value.LastName,
       email: this.formData.value.Email,
       dateOfBirth: this.formData.value.DateOfBirth,
-      country : this.formData.value.Country,
+      country: this.formData.value.Country,
       state: this.formData.value.State,
       disabled: this.formData.value.PhysicallyDisabled,
       address: this.formData.value.Address,
@@ -198,7 +203,7 @@ export class ApplicantComponent implements OnInit {
       phone: this.formData.value.Phone
 
     }
- 
+
     this.applicantService.saveApplicantDetails(this.applicantDetails, this.userId)
       .subscribe(
         (response: any) => {
@@ -218,7 +223,7 @@ export class ApplicantComponent implements OnInit {
       userId: this.userId,
       grantId: parseInt(this.formData.value.GrantProgram)
     }
-  
+
     this.applicantService.saveGrantDetails(this.grantApplied).subscribe(
 
       (response: any) => {

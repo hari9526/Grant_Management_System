@@ -16,9 +16,11 @@ namespace API.Controllers
         }
         [HttpGet("{userId}")]
         public async Task<ActionResult<ApplicantDto>> GetDetails(int userId)
-        {            
-            var result =  await _applicant.Get(userId);                         
-            return result; 
+        {
+
+            var result = await _applicant.Get(userId);
+            await Task.Delay(1000);
+            return result;
         }
 
 
@@ -42,13 +44,13 @@ namespace API.Controllers
         public async Task<ActionResult<UserGrantMapping>> GrantDetails(UserGrantMappingDto mappingDto)
         {
             //If the user doesn't add grant details 
-            if(mappingDto.GrantId == 0 || mappingDto.UserId == 0)
+            if (mappingDto.GrantId == 0 || mappingDto.UserId == 0)
                 return NoContent();
 
-            if(await _applicant.DidApplicantAlreadyApply(mappingDto))
-                return BadRequest("You have already applied for this grant!");                 
+            if (await _applicant.DidApplicantAlreadyApply(mappingDto))
+                return BadRequest("You have already applied for this grant!");
             //saves to usergrant mapping table
-            return await _applicant.GrantDetails(mappingDto); 
+            return await _applicant.GrantDetails(mappingDto);
 
         }
 

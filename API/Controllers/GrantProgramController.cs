@@ -22,7 +22,7 @@ namespace API.Controllers
         
         public async Task<ActionResult<IEnumerable<GrantProgram>>> GetGrants()
         {
-            //return await _context.GrantProgram.ToListAsync();
+            //return await _context.GrantProgram.ToListAsync();           
             return new ActionResult<IEnumerable<GrantProgram>>(await _grants.GetGrants());
         }
         [HttpGet("active")]

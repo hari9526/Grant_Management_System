@@ -3,23 +3,42 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { errorMonitor } from 'events';
 import { ToastrService } from 'ngx-toastr';
 import { NavigationExtras, Router } from '@angular/router';
+import { SpinnerService } from '../_services/spinner.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private toastr: ToastrService, private router: Router) { }
+  constructor(private toastr: ToastrService, private router: Router, private spinner: SpinnerService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    
+    return this.handler(next, request);
+
+  }
+  handler(next, request) {
+    this.spinner.requestStarted();
     return next.handle(request).pipe(
+      
+      map((event: HttpEvent<any>) => {
+       
+        if (event instanceof HttpResponse) {
+          this.spinner.requestEnded();
+        }
+        return event;
+      }),
+
       catchError(error => {
+        
         if (error) {
+          this.spinner.resetSpinner();
           switch (error.status) {
             case 400:
               if (error.error.errors) {
@@ -55,6 +74,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
         return throwError(error);
       })
+
+
+
     );
   }
+
 }
