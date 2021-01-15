@@ -1,6 +1,6 @@
 .linePreloader{
     width:300px;
-    height:4px;
+    height:2px;
     background:linear-gradient(to right,green,green);
     background-color:#ccc;
     position:relative;
