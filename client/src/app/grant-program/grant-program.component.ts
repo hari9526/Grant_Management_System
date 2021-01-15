@@ -130,11 +130,12 @@ export class GrantProgramComponent implements OnInit {
       this.grantservice.deleteGrant(Id).subscribe(
         (response: any) => {
           this.grantProgramForms.removeAt(i);
-          this.toaster.success("Deletion success!"); 
+          this.toaster.success("Deletion success!");
+          if(this.grantProgramForms.length == 0)
+            this.InitializeGrantProgramForms(); 
         }
       )
-      if(this.grantProgramForms.length == 0)
-            this.InitializeGrantProgramForms();
+      
     }
   }
 }
