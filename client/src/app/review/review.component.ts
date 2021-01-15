@@ -43,21 +43,34 @@ export class ReviewComponent implements OnInit {
   applicantList: FormArray = this.fb.array([]);
   emptyList: boolean = false;
 
-  constructor(private fb: FormBuilder, private reviewService: ReviewService, private toaster : ToastrService) {
+  constructor(private fb: FormBuilder, private reviewService: ReviewService, private toaster: ToastrService) {
+    this.initializeApplicant(); 
     this.GetApplicants();
   }
 
   ngOnInit(): void {
   }
+  initializeApplicant() {
+    this.applicantList.push(this.fb.group({
+      id: [0],
+      applicantName: [''],
+      programCode: [''],
+      country: [''],
+      applicationStatus: [''],
+      reviewerStatus: [true]
+    })     
+    );
+  }
   GetApplicants() {
     this.reviewService.getReviewDetails().subscribe(response => {
-     
-      if (Object.keys(response).length === 0) 
+
+      if (Object.keys(response).length === 0)
         this.emptyList = true;
       else {
+        this.applicantList = this.fb.array([]); 
         (response as []).forEach((review: ReviewItem) => {
           this.applicantList.push(this.fb.group({
-            id: [review.id], 
+            id: [review.id],
             applicantName: [review.applicantName],
             programCode: [review.programCode],
             country: [review.country],
@@ -69,14 +82,14 @@ export class ReviewComponent implements OnInit {
         );
       }
     });
-    
+
   }
-  UpdateReview(formData: FormGroup){
-   
-    this.reviewService.UpdateReview(formData.value).subscribe(     
-      (response : any) =>{              
+  UpdateReview(formData: FormGroup) {
+
+    this.reviewService.UpdateReview(formData.value).subscribe(
+      (response: any) => {
         this.toaster.success("Updated!")
       }
-    );       
+    );
   }
 }

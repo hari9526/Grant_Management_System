@@ -5,9 +5,9 @@
 
 </div>
 
-<div class="grid-table" *ngIf="!emptyList">
-    <div class="thead">
-        <div class="tr" [@itemAnim]>
+<div class="grid-table" *ngIf="!emptyList" >
+    <div class="thead" [@itemAnim]>
+        <div class="tr" >
             <div class="td">Program Name</div>
             <div class="td">Program Code</div>
             <div class="td">Start Date</div>
@@ -31,7 +31,7 @@
 
             <div class="td">
               
-                <app-calendar formControlName="StartDate" placeholder="Select dateeeeee">
+                <app-calendar formControlName="StartDate" placeholder="Select date">
 
                 </app-calendar>
 

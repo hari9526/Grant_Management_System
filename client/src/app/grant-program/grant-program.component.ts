@@ -50,6 +50,8 @@ export class GrantProgramComponent implements OnInit {
               private grantservice: GrantProgramService, 
               private toaster: ToastrService) {
     this.GetGrants(); 
+    this.InitializeGrantProgramForms(); 
+     
     
  
 
@@ -63,11 +65,12 @@ export class GrantProgramComponent implements OnInit {
     this.grantservice.getGrant().subscribe(
       response => {
         if ( Object.keys(response).length === 0)
-          this.InitializeGrantProgramForms(); 
+          this.toaster.info("Create new grant programs!") 
         else {
           //We are generating formarray as per the data received from 
           //the api
           //map and forEach are the same. For iterating through a collection. 
+          this.grantProgramForms = this.fb.array([]); 
           (response as []).map((grantProgram: GrantProgram) => {
             this.grantProgramForms.push(this.fb.group({
               Id: [grantProgram.id],
@@ -119,6 +122,8 @@ export class GrantProgramComponent implements OnInit {
   delete(Id, i) {
     if (Id == 0) {
       this.grantProgramForms.removeAt(i);
+      if(this.grantProgramForms.length == 0)
+            this.InitializeGrantProgramForms();
     }
     else if (confirm("Sure you want to delete?")) {
       
@@ -128,6 +133,8 @@ export class GrantProgramComponent implements OnInit {
           this.toaster.success("Deletion success!"); 
         }
       )
+      if(this.grantProgramForms.length == 0)
+            this.InitializeGrantProgramForms();
     }
   }
 }
