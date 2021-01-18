@@ -65,7 +65,7 @@ namespace API.Controllers
                 return Unauthorized("Username not found!");
             if (!user.Password.Equals(loginDetails.Password))
                 return Unauthorized("Invalid Password");
-          
+            await Task.Delay(300);
             return new UserDto
             {
                 Id = user.Id,

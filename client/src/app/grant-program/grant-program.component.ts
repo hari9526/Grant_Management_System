@@ -51,6 +51,7 @@ export class GrantProgramComponent implements OnInit {
               private toaster: ToastrService) {
     this.GetGrants(); 
     this.InitializeGrantProgramForms(); 
+    
      
     
  
@@ -97,7 +98,7 @@ export class GrantProgramComponent implements OnInit {
       ProgramCode: ['', Validators.required],
       StartDate: ['', Validators.required],
       EndDate: ['', Validators.required],
-      Status: [false]
+      Status: [Validators.required]
     }));
   }
   recordSubmit(fg: FormGroup) {

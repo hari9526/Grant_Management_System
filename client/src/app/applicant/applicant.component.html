@@ -1,6 +1,7 @@
 
 <div class="wrapper">
-    <div class="wrapped-div">
+    <img src="/assets/img/form.jpg" >
+    <div class="wrapped-div ">
 
         <div class="row">
             <div class="col-lg-10 offset-md-1">
@@ -87,9 +88,9 @@
 
                                             </app-calendar>
 
-                                            <label class="text-danger"
-                                            *ngIf="formData.get('DateOfBirth').touched && formData.get('DateOfBirth').errors?.required">This
-                                            field is mandatory.</label>
+                                                <!-- <label class="text-danger"
+                                                *ngIf="formData.get('DateOfBirth').touched && formData.get('DateOfBirth').errors?.required">This
+                                                field is mandatory.</label> -->
 
                                     </div>
 
@@ -245,7 +246,7 @@
                     <div class="form-row mt-4">
                         <div class="form-group mb-5 col-md-8 offset-md-2 mt-3">
                             <button type="submit"
-                                tooltip="If you have added education details then the status of your application is &#34;Completed&#34;. If you didn&#39;t add education details, then it would be in &#34;Submitted&#34; status. "
+                                tooltip="If you have added education details then the status of your application is &#34;Completed&#34;. If you don&#39;t add education details, then it would be in &#34;Submitted&#34; status. "
                                 class="btn btn-primary active btn-lg btn-block" [disabled]="!formData.valid"
                                 (click)="saveApplicant()">
                                 <img *ngIf="isLoading" style="width :30px" src="assets/img/Loader.gif">

@@ -8,6 +8,8 @@ namespace data.Interfaces
     {
         Task<IEnumerable<ReviewDto>> GetDetails(); 
         Task<ReviewDto> UpdateReview(ReviewDto review); 
+
+        Task<bool> SetApplicationStatus(int userId, string applicationStatus); 
         
     }
 }

@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     this.isLoading = true; 
-    this.signUpButtonText = "Signing in!"; 
+    this.signUpButtonText = "Creating account..."; 
     var body ={
       FirstName : this.formModel.value.FirstName, 
       LastName : this.formModel.value.LastName, 

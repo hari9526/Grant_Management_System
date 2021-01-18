@@ -2,6 +2,15 @@ input[readonly] {
   background-color: white;
 }
 
+.img{
+
+
+  max-width: 50px !important;
+
+  height: 25px;
+}
+
+
 .form-align{
   margin-left: 19px;
   margin-right: 19px;
@@ -91,6 +100,7 @@ input[readonly] {
     max-width: 100%;
     position: relative;
     padding: 0px;
+    border-top:4px solid #337AB7 !important;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   }

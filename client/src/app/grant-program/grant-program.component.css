@@ -1,8 +1,4 @@
-.image{
-    height:26em; background-size:cover; width:auto;
-    background-image:url('/assets/img/emptylist.jpg');
-    background-position:50% 50%;
-  }
+
 
 .grid-table
 {
@@ -14,13 +10,15 @@
 
 	display:table-header-group;	
 	font-weight:bold;
+	color: white; 
 	border-radius: 20px;
 	border-bottom: 1px solid black;
     text-align: center;
-	background-color: #f0f8ff;
+	background-color: #337AB7;
 	
 	
 }
+
 .tbody
 {
 	display:table-row-group;
@@ -33,7 +31,7 @@
 .td
 {
 	display:table-cell;
-	padding: 10px 1px 1px 5px;
+	padding: 10px 10px 10px 10px;
 }
 .thead div.tr div.td:last-child{
     background-color: #fff;

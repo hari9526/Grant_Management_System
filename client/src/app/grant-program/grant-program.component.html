@@ -44,6 +44,7 @@
             <div class="td">
 
                 <select class="form-control" formControlName="Status">
+                    <option [ngValue]="">--Select--</option>
                     <option [ngValue]="true">Active</option>
                     <option [ngValue]="false">Inactive</option>
                 </select>
@@ -51,7 +52,7 @@
 
             </div>
             <div class="td">
-                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fg.invalid"
+                <button class="btn text-primary bt-lg" [tooltip]="(fg.get('Id').value ==  0)? 'Save' : 'Edit'" type="submit" [disabled]="fg.invalid"
                     (click)="recordSubmit(fg)">
                     <i class="far" [ngClass]="(fg.get('Id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
 
@@ -63,4 +64,5 @@
         </form>
 
     </div>
+   
 </div>

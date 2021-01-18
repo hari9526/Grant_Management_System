@@ -37,6 +37,17 @@ namespace data.Implementations
             return details; 
         }
 
+        public async Task<bool> SetApplicationStatus(int userId, string applicationStatus)
+        {
+            var applicantList = await  _context.UserGrantMappings.Where(x=>x.UserId == userId).ToListAsync(); 
+            foreach(var item in applicantList){
+                item.ApplicationStatus = applicationStatus; 
+            }
+            await _context.SaveChangesAsync(); 
+            return true; 
+            
+        }
+
         public async Task<ReviewDto> UpdateReview(ReviewDto review)
         {
             var result = await _context.UserGrantMappings.FindAsync(review.Id); 

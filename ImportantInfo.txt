@@ -133,3 +133,10 @@ package.json information. This folder is too big for version control.
 JWT Authentication: 
 
 https://jwt.io/        For checking tokens 
+
+
+
+Pics: 
+
+Please, copy this code on your website to accredit the author:
+<a href="http://www.freepik.com">Designed by slidesgo / Freepik</a>

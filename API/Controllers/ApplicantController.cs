@@ -19,7 +19,7 @@ namespace API.Controllers
         {
 
             var result = await _applicant.Get(userId);
-            await Task.Delay(1000);
+            //await Task.Delay(200);
             return result;
         }
 

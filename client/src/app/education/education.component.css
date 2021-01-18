@@ -11,10 +11,11 @@
       
     display:table-header-group;	
     font-weight:bold;
+    color: white; 
     border-radius: 20px;
     border-bottom: 1px solid black;
       text-align: center;
-    background-color: #7eb9f5;
+    background-color: #337AB7;
       
   }
   .tbody
