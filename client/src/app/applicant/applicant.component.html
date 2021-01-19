@@ -35,7 +35,7 @@
                                         
 
                                         <select class="form-control" (change)="getStateList($event.target.value)" formControlName="Country">
-                                            <option value="0">--Select--</option>
+                                            <option value="0" disabled>--Select--</option>
                                             <option *ngFor="let country of countryList" [value]="country.id" >
                                                 {{country.name}}
                                             </option>
@@ -98,7 +98,7 @@
                                         <label>State</label>
                                         <!-- <input class="form-control" formControlName="State"> -->
                                         <select class="form-control" formControlName="State">
-                                            <option value="0">--Select--</option>
+                                            <option value="0" disabled>--Select--</option>
                                             <option *ngFor="let state of stateList" [value]="state.id">
                                                 {{state.name}}
                                             </option>   
@@ -111,7 +111,7 @@
                                     <label>Grant program</label>
 
                                     <select class="form-control" formControlName="GrantProgram">
-                                        <option value="0">--Select--</option>
+                                        <option value="0" disabled>--Select--</option>
                                         <option *ngFor="let item of grantArrayList" value="{{item.id}}">
                                             {{item.programName}}
                                         </option>

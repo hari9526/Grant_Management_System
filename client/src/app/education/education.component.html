@@ -30,7 +30,7 @@
                 <input class="form-control" formControlName="yearOfCompletion">
             </div>
             <div class="td">
-                <button class="btn text-primary bt-lg" tooltip="Edit" type="submit" [disabled]="fgroup.invalid" (click)="submit(fgroup)">
+                <button class="btn text-primary bt-lg" [tooltip]="(fgroup.get('id').value ==  0)? 'Save' : 'Edit'" type="submit" [disabled]="fgroup.invalid" (click)="submit(fgroup)">
                     <i class="far" [ngClass]="(fgroup.get('id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
 
                 </button>

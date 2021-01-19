@@ -16,10 +16,10 @@
     <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
         <form class="tr" [formGroup]="fg" *ngFor="let fg of grantProgramForms.controls; let i = index">
             <div class="td">
-                <input class="form-control" formControlName="ProgramName">
+                <input class="form-control" formControlName="ProgramName" placeholder="Enter program name">
             </div>
             <div class="td">
-                <input class="form-control" formControlName="ProgramCode">
+                <input class="form-control" formControlName="ProgramCode" placeholder="Enter program code">
             </div>
 
             <div class="td">
@@ -37,7 +37,7 @@
             <div class="td">
 
                 <select class="form-control" formControlName="Status">
-                    <option [ngValue]="">--Select--</option>
+                    <option [ngValue]="undefined" >--Select--</option>
                     <option [ngValue]="true">Active</option>
                     <option [ngValue]="false">Inactive</option>
                 </select>
