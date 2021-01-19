@@ -7,7 +7,9 @@ input[readonly] {
 
   max-width: 50px !important;
 
-  height: 25px;
+  height: 39px;
+  top: 0px !important;
+  vertical-align: top;
 }
 
 
@@ -88,7 +90,7 @@ input[readonly] {
     flex-direction: column; 
     justify-content: center;
     width: 100%;
-    padding: 20px;
+    padding-bottom: 20px;
   }
 
   .wrapped-div {

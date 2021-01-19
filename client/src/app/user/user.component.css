@@ -10,6 +10,10 @@
   }
 
   .image{
+    display: flex;
+    align-items: right;
+    flex-direction: column; 
+    justify-content: center;
     height:38em; background-size:cover; width:auto;
     background-image:url('/assets/img/login.jpg');
     background-position:50% 50%;

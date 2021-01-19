@@ -1,7 +1,7 @@
 .linePreloader{
     width:300px;
     height:2px;
-    background:linear-gradient(to right,green,green);
+    background:linear-gradient(to right,#009C86,#009C86);
     background-color:#ccc;
     position:relative;
     top:5px;

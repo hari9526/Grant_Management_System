@@ -4,8 +4,14 @@ body{
 
 input.form-control:focus{
     box-shadow: none;
+    border-color: #073c6d;
+    
 }
+.form-control{
+    color: #0e0d0d !important;
 
+    border-color: #799ab8;
+}
 
 div.form-group label:not(.text-danger){
     color: #545d6a;
