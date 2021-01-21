@@ -1,0 +1,25 @@
+.nav-color{
+    background:white;
+    border-bottom:1px solid #337AB7 !important;
+}
+
+.active {
+    
+    
+    color: rgb(43, 42, 42) !important;
+    border-bottom: 1px solid  rgb(43, 42, 42);
+ }
+
+
+
+
+
+ .remomveUnderline{
+   
+    color: rgb(145, 141, 141);
+    text-decoration: none;
+ }
+/* 
+ .remomveUnderline :hover{
+     color:rgb(10, 10, 10)
+ } */

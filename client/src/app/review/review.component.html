@@ -1,0 +1,54 @@
+
+ <div class="container mt-5"  *ngIf="emptyList" [@noItemAnim]>
+    <div class="image">
+
+    </div>
+
+ </div>
+
+
+
+<div class="grid-table mt-5" *ngIf="!emptyList">
+    <div class="thead" [@itemAnim]>
+        <div class="tr">
+            <div class="td">Applicant Name</div>
+            <div class="td">Program Code</div>
+            <div class="td">Country</div>
+            <div class="td">Application Status</div>
+            <div class="td">Reviewer Status</div>
+        </div>
+    </div>
+    <div class="tbody" [@listAnim]="applicantList.controls.length">
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of applicantList.controls" 
+        (submit)="UpdateReview(fg)">
+            <div class="td">
+                <input class="form-control" formControlName="applicantName" [readonly]="true">                
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="programCode" [readonly]="true">
+            </div>
+
+            <div class="td">
+                <input class="form-control" formControlName="country" [readonly]="true">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="applicationStatus" [readonly]="true">
+            </div>
+            <div class="td">
+                
+
+                <select  class="form-control" formControlName="reviewerStatus">
+                    <option [ngValue]="true">Approved</option>
+                    <option [ngValue]="false">Rejected</option>
+                </select>
+            </div>
+            <div class="td">
+                <button class="btn bt-lg text-primary" tooltip="Edit" type="submit" [disabled]="fg.invalid">
+                    <i class="far fa-edit"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

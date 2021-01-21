@@ -1,0 +1,10 @@
+<input type="text" 
+    placeholder="Select date" 
+    class="form-control" 
+    bsDatepicker
+    [(ngModel)]="valueDate"
+    (ngModelChange)="onValueChange($event)"
+    (focus)="onFocus()"
+    [placeholder]="placeholder"
+    [minDate]="minDateCorrection()"    
+    [bsConfig]="{ isAnimated: true, containerClass: 'theme-dark-blue',  adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD'}">

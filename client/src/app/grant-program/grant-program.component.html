@@ -1,0 +1,61 @@
+<div class="grid-table mt-5" *ngIf="!emptyList" >
+    <div class="thead" [@itemAnim]>
+        <div class="tr" >
+            <div class="td">Program Name</div>
+            <div class="td">Program Code</div>
+            <div class="td">Start Date</div>
+            <div class="td">End Date</div>
+            <div class="td">Status</div>
+            <div class="td" (click)="InitializeGrantProgramForms()">
+                <button class="btn text-success" tooltip="Add new grants"><i class="fa fa-plus"></i></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tbody" [@listAnim]="grantProgramForms.controls.length">
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of grantProgramForms.controls; let i = index">
+            <div class="td">
+                <input class="form-control" formControlName="ProgramName" placeholder="Enter program name">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="ProgramCode" placeholder="Enter program code">
+            </div>
+
+            <div class="td">
+              
+                <app-calendar formControlName="StartDate" placeholder="Select date">
+
+                </app-calendar>
+
+
+            </div>
+            <div class="td">
+                <app-calendar formControlName="EndDate" [minDate]="fg.get('StartDate').value" placeholder="Select date">
+                </app-calendar>
+            </div>
+            <div class="td">
+
+                <select class="form-control" formControlName="Status">
+                    <option [ngValue]="undefined" >--Select--</option>
+                    <option [ngValue]="true">Active</option>
+                    <option [ngValue]="false">Inactive</option>
+                </select>
+
+
+            </div>
+            <div class="td">
+                <button class="btn text-primary bt-lg" [tooltip]="(fg.get('Id').value ==  0)? 'Save' : 'Edit'" type="submit" [disabled]="fg.invalid"
+                    (click)="recordSubmit(fg)">
+                    <i class="far" [ngClass]="(fg.get('Id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
+
+                </button>
+                <button class="btn text-danger" tooltip="Delete" (click)="delete(fg.get('Id').value, i)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+   
+</div>

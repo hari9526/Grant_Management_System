@@ -1,0 +1,134 @@
+input[readonly] {
+  background-color: white;
+}
+
+.img{
+
+
+  max-width: 50px !important;
+
+  height: 39px;
+  top: 0px !important;
+  vertical-align: top;
+}
+
+
+.form-align{
+  margin-left: 19px;
+  margin-right: 19px;
+}
+
+  .grid-table
+  {
+    display:table;
+
+  }
+  .thead
+  {
+      
+    display:table-header-group;	
+    font-weight:bold;
+    border-radius: 20px;
+    border-bottom: 1px solid black;
+      text-align: center;
+    background-color: #fafbfc;
+      
+  }
+  .tbody
+  {
+    display:table-row-group;
+  }
+  .tr
+  {
+    display:table-row;
+    
+  }
+  .td
+  {
+    display:table-cell;
+    padding: 10px 10px 10px 10px;
+  }
+  .thead div.tr div.td:last-child{
+      background-color: #fff;
+  }
+  i:hover{
+    cursor: pointer;
+  }
+  
+  input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+    border-color: #dc3545;
+  }
+  
+  
+  .elementToFadeInAndOut {
+      -webkit-animation: fadeinout 2s linear forwards;
+      animation: fadeinout 2s linear forwards;
+      opacity: 0;
+  }
+  
+  @-webkit-keyframes fadeinout {
+    50% { opacity: 1; }
+  }
+  
+  @keyframes fadeinout {
+    50% { opacity: 1; }
+  }
+  
+
+.tablecustom{
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+
+}
+  
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .wrapped-div {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 0px;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    padding: 0px;
+    border-top:4px solid #337AB7 !important;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  }
+
+  /* Tabs */
+.tab-header{
+    text-align: center;
+    color: #0062CC;
+}
+
+ 
+
+  .tab-header h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    display:inline-block;
+    padding: 30px 40px 10px 40px;
+    cursor: pointer;
+    color: #0062CC;
+    border-bottom: 2px solid #0062CC;
+  }
+
+  .tab-header h2:focus {
+      outline: none;
+  }
+
+
+

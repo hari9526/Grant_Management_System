@@ -1,0 +1,44 @@
+<div class="grid-table">
+    <div class="thead">
+        <div class="tr">
+            <div class="td">Course Name</div>
+            <div class="td">Country</div>
+            <div class="td">Institution</div>
+            <div class="td">Year</div>
+            <div class="td" (click)="InitializeEducationalDetails()">
+                <button class="btn text-success" 
+                tooltip="Add qualifications">
+                <i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="tbody" [@listAnim]="formModelEducation.controls.length">
+        <form class="tr" [formGroup]="fgroup"
+         *ngFor="let fgroup of formModelEducation.controls; 
+         let i = index"
+         >
+            <div class="td">
+                <input class="form-control" formControlName="courseName">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="country">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="institutionName">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="yearOfCompletion">
+            </div>
+            <div class="td">
+                <button class="btn text-primary bt-lg" [tooltip]="(fgroup.get('id').value ==  0)? 'Save' : 'Edit'" type="submit" [disabled]="fgroup.invalid" (click)="submit(fgroup)">
+                    <i class="far" [ngClass]="(fgroup.get('id').value ==  0)? 'fa-save' : 'fa-edit'"></i>
+
+                </button>
+                <button class="btn text-danger ml-0" tooltip="Delete" type="submit" (click)="delete(fgroup.get('id').value, i)"  >
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+           
+        </form>
+    </div>
+</div>
